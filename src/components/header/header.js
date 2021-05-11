@@ -24,7 +24,6 @@ const Header = () => {
 				<Button className={classes.catalogBtn}> 
 					<svg 
 						className='icon'
-						enable-background="new 0 0 512 512" 
 						height="512" 
 						viewBox="0 0 512 512"
 						width="512">

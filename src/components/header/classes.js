@@ -28,12 +28,15 @@ const useClasses = makeStyles(theme => ({
     },
     catalogBtn: {
         backgroundColor: '#3d465455',
-        marginLeft: 30,
+        marginLeft: 35,
+        textTransform: 'capitalize',
+        fontSize: 17,
+        padding: '6px 12px',
         '& .icon': {
             marginRight: 5,
             width: 24,
             height: 'auto',
-            fill: 'currentColor',
+            fill: '#000',
         },
         '&:hover': {
             backgroundColor: '#3d465475'
