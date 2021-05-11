@@ -1,15 +1,18 @@
 import React from 'react'
-import useClasses from './classes'
+import {ThemeProvider} from '@material-ui/core/styles'
+import useClasses, {Theme} from './classes'
 
-import Login from '../login/login'
+// import Login from '../login/login'
+import Header from '../header/header'
 
 const App = () => {
     const classes = useClasses()
     return (
-        <div className={classes.class}>
-            Hey
-            <Login/>
-        </div>
+        <ThemeProvider theme={Theme}>
+            <div className={classes.body}>
+                <Header/>
+            </div>
+        </ThemeProvider>
     )
 }
  
