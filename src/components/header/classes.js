@@ -9,6 +9,8 @@ const useClasses = makeStyles(theme => ({
           },
         '& .title': {
             display: 'none',
+            fontWeight: 700,
+            textTransform: 'uppercase',
             [theme.breakpoints.up('sm')]: {
                 display: 'block',
             },
@@ -27,19 +29,20 @@ const useClasses = makeStyles(theme => ({
         }
     },
     catalogBtn: {
-        backgroundColor: '#3d465455',
+        backgroundColor: '#3d465440',
         marginLeft: 35,
         textTransform: 'capitalize',
         fontSize: 17,
+        color: '#f2f2f2',
         padding: '6px 12px',
         '& .icon': {
             marginRight: 5,
             width: 24,
             height: 'auto',
-            fill: '#000',
+            fill: '#f2f2f2',
         },
         '&:hover': {
-            backgroundColor: '#3d465475'
+            backgroundColor: '#3d465465'
         }
     },
     btnGroup: {

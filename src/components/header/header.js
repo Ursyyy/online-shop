@@ -34,7 +34,8 @@ const Header = () => {
 								<path d="m174 512h-108c-36.393 0-66-29.607-66-66v-108c0-36.393 29.607-66 66-66h108c36.393 0 66 29.607 66 66v108c0 36.393-29.607 66-66 66zm-108-208c-18.748 0-34 15.252-34 34v108c0 18.748 15.252 34 34 34h108c18.748 0 34-15.252 34-34v-108c0-18.748-15.252-34-34-34z"/>
 							</g>
 						</svg>
-					Catalog</Button>
+					Catalog
+				</Button>
 				<div className={classes.btnGroup}>
 					<div className={classes.search}>
 						<div className={classes.searchIcon}>
