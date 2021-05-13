@@ -6,11 +6,64 @@ import DialogContent from '@material-ui/core/DialogContent'
 import TextField from '@material-ui/core/TextField'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded'
-import useClasses from './classes'
 import { Typography, Link } from '@material-ui/core'
+import useClasses from './classes'
+import { EMAIL, INPUT_PHONE, PHONE } from '../../utils/regexp'
+import { registerUser } from '../../https/userAPI'
 
 const Register = ({open, close, changeAuth}) => {
     const classes = useClasses()
+    const [firstName, setFname] = useState('')
+    const [lastName, setSname] = useState('')
+    const [phone, setPhone] = useState(null)
+    const [email, setEmail] = useState(null)
+    const [password, setPassword] = useState('')
+
+    const [errors, setErrors] = useState({})
+
+    const capitalize = str => {
+        if (typeof str !== 'string') return ''
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+    }
+
+    const checkPhone = e => {
+        const text = e.target.value
+        if(INPUT_PHONE.test(text)){
+            setPhone(text)
+        }
+    }
+
+    const register = () => {
+        setErrors({})
+        if(firstName && PHONE.test(phone) && EMAIL.test(email) && password){
+            console.log(true)
+            registerUser({
+                email, 
+                firstName, 
+                lastName, 
+                phone,
+                password
+            })
+        } else {
+            console.log(firstName , phone , email , password)
+            console.log(errors.firstName , errors.phone , errors.email , password)
+            let newErrors = errors
+            if(firstName === ''){
+                newErrors.firstName = "Please enter your name"
+            }
+            if(!PHONE.test(phone)){
+                newErrors.phone = "Please enter your phone number"
+            }
+            if(EMAIL.test(email)){
+                newErrors.email = "Please enter your email"
+            }
+            if(password === ''){
+                newErrors.password = true
+            }   
+            console.log(errors)
+            setErrors(newErrors)
+        }
+    }
 
     return (
         <Dialog
@@ -21,26 +74,26 @@ const Register = ({open, close, changeAuth}) => {
             >
             <DialogTitle className={classes.title}>
                 Register
-                <CloseRoundedIcon/>
+                <CloseRoundedIcon onClick={close}/>
             </DialogTitle>
             <DialogContent className={classes.content}>
                 <div className={classes.loginForm}>
                     <Typography className='label'>First name</Typography>
-                    <TextField className='inputField' type='text' variant="outlined" />
-                    <Typography className='label'>Second name</Typography>
-                    <TextField className='inputField' type='text' variant="outlined" />
+                    <TextField className='inputField' type='text' variant="outlined" error={errors.firstName !== undefined} helperText={errors.firstName} onChange={e => setFname(capitalize(e.target.value))}/>
+                    <Typography className='label'>Last name</Typography>
+                    <TextField className='inputField' type='text' variant="outlined" onChange={e => setSname(capitalize(e.target.value))}/>
                     <Typography className='label'>Tel. number</Typography>
-                    <TextField className='inputField' type='text' variant="outlined" />
+                    <TextField className='inputField' pattern="[0-9]*" value={phone || ''} variant="outlined" error={errors.phone !== undefined} helperText={errors.phone} onChange={checkPhone}/>
                     <Typography className='label'>Email</Typography>
-                    <TextField className='inputField' type='email' variant="outlined" />
+                    <TextField className='inputField' type='email' variant="outlined" error={errors.email !== undefined} helperText={errors.email} onChange={e => setEmail(e.target.value)}/>
                     <Typography className='label'>Password</Typography>
-                    <TextField className='inputField' type="password" variant="outlined" />
+                    <TextField className='inputField' type="password" error={errors.password !== undefined} variant="outlined" onChange={e => setPassword(e.target.value)}/>
                     <div className='secondary'>
                         <Typography className='descr'>The password must be at least 6 characters long, contain numbers and Latin letters, including capital letters, and must not coincide with the name and email.</Typography>
                         <Typography className='descr'>By registering, you agree to the <Link to="#">user agreement</Link></Typography>
                     </div>
                     <DialogActions>
-                        <Button className={classes.loginBtn} onClick={close} color="primary">
+                        <Button className={classes.loginBtn} onClick={register} color="primary">
                             Register
                         </Button>
                     </DialogActions>
@@ -52,7 +105,6 @@ const Register = ({open, close, changeAuth}) => {
                     <Typography className='label'>Register with</Typography>
                     <Button className='connectBtn' color="primary">
                         <svg 
-                            enable-background="new 0 0 24 24" 
                             height="512" 
                             viewBox="0 0 24 24" 
                             width="512" 

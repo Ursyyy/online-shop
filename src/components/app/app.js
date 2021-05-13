@@ -4,7 +4,6 @@ import useClasses, {Theme} from './classes'
 
 import Header from '../header/header'
 import MainPage from '../mainPage/mainPage'
-import Cart from '../cart/cart'
 
 const App = () => {
     const classes = useClasses()
@@ -12,7 +11,6 @@ const App = () => {
         <ThemeProvider theme={Theme}>
             <Header/>
             <MainPage />
-            {/* <Cart/> */}
         </ThemeProvider>
     )
 }

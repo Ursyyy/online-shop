@@ -38,13 +38,16 @@ const useClasses = makeStyles(theme => ({
             marginBottom: 12,
         }, 
         '& .emptyCart': {
-            padding: 50,
+            padding: '100px 200px',
             '& svg':{
                 width: 150,
                 height: 'auto' 
             },
             '& .title': {
-                textAlign: 'center'
+                textAlign: 'center',
+                fontSize: 18,
+                fontWeight: 600,
+                marginTop: 25
             }
         }       
     },

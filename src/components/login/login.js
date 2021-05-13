@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded'
 import useClasses from './classes'
-import { Typography, Checkbox, FormControlLabel, Link } from '@material-ui/core'
+import { Typography, Link } from '@material-ui/core'
 
 const Login = ({open, close, changeAuth}) => {
     const classes = useClasses()
@@ -20,7 +20,7 @@ const Login = ({open, close, changeAuth}) => {
             >
             <DialogTitle className={classes.title}>
                 Log in
-                <CloseRoundedIcon/>
+                <CloseRoundedIcon onClick={close}/>
             </DialogTitle>
             <DialogContent className={classes.content}>
                 <div className={classes.loginForm}>
@@ -29,17 +29,6 @@ const Login = ({open, close, changeAuth}) => {
                     <Typography className='label'>Password</Typography>
                     <TextField className='inputField' type="password" variant="outlined" />
                     <div className='secondary'>
-                        <FormControlLabel
-                            control={
-                            <Checkbox
-                                className={classes.checkBox}
-                                disableRipple
-                                name="checkedB"
-                                color="primary"
-                            />
-                            }
-                            label="Remember me"
-                        />
                         <Link to="#" color="primary">Fogot password?</Link>
                     </div>
                     <DialogActions>
@@ -55,7 +44,6 @@ const Login = ({open, close, changeAuth}) => {
                     <Typography className='label'>Login with</Typography>
                     <Button className='connectBtn' color="primary">
                         <svg 
-                            enable-background="new 0 0 24 24" 
                             height="512" 
                             viewBox="0 0 24 24" 
                             width="512" 

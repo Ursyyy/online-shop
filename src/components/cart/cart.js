@@ -6,11 +6,9 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded'
 import useClasses from './classes'
 import { Typography } from '@material-ui/core'
 
-const Cart = () => {
+const Cart = ({open, close}) => {
     const classes = useClasses()
     const [cart, setCart] = useState([])
-    const open = true
-    const close = () => console.log('l')
     return (
         <Dialog
             className={classes.dialog}
@@ -20,7 +18,7 @@ const Cart = () => {
             >
             <DialogTitle className={classes.title}>
                 Cart
-                <CloseRoundedIcon/>
+                <CloseRoundedIcon onClick={close}/>
             </DialogTitle>
             <DialogContent className={classes.content}>
                 {cart.length ? 
@@ -63,7 +61,7 @@ const Cart = () => {
                             <path d="m170.574 180.358h-.542c-5.333 0-9.673-4.339-9.673-9.673v-32.443c0-5.333 4.339-9.673 9.673-9.673h.542c5.334 0 9.673 4.339 9.673 9.673v32.443c.001 5.334-4.339 9.673-9.673 9.673zm-.541-46.789c-2.577 0-4.673 2.096-4.673 4.673v32.443c0 2.577 2.096 4.673 4.673 4.673h.542c2.577 0 4.673-2.096 4.673-4.673v-32.443c0-2.577-2.097-4.673-4.673-4.673z"/>
                             <path d="m202.122 180.358h-.542c-5.333 0-9.673-4.339-9.673-9.673v-32.443c0-5.333 4.339-9.673 9.673-9.673h.542c5.333 0 9.673 4.339 9.673 9.673v32.443c-.001 5.334-4.34 9.673-9.673 9.673zm-.542-46.789c-2.577 0-4.673 2.096-4.673 4.673v32.443c0 2.577 2.096 4.673 4.673 4.673h.542c2.577 0 4.673-2.096 4.673-4.673v-32.443c0-2.577-2.096-4.673-4.673-4.673z"/>
                         </svg>
-                        <Typography className='title'>Cart is empty</Typography>
+                        <Typography className='title'>Your cart is empty</Typography>
                     </div>
                 }
             </DialogContent>

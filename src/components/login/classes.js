@@ -98,6 +98,7 @@ const useClasses = makeStyles(theme => ({
         '& .secondary': {
             display: 'flex',
             fontSize: '0.9em',
+            marginBottom: 7,
             "& a": {
                 paddingTop: 9,
                 marginLeft: 'auto',
@@ -106,20 +107,6 @@ const useClasses = makeStyles(theme => ({
                     color: '#345DA7'
                 }
             },
-            '& span': {
-                fontSize: 15,
-                '& .MuiTypography-root MuiFormControlLabel-label MuiTypography-body1': {
-                    color: '#00000050'
-                }
-            },
-        }
-    },
-    checkBox: {
-        '&:hover': {
-            backgroundColor: 'transparent',
-        },
-        '& .MuiCheckbox-colorPrimary.Mui-checked:hover': {
-            backgroundColor: 'transparent',
         }
     },
     loginBtn: {

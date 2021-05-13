@@ -34,9 +34,11 @@ const useClasses = makeStyles(theme => ({
     content: {
         padding: '10px 24px 10px 15px',
         display: 'flex',
+        '& .MuiFormControl-root':{
+            marginBottom: 12,
+        },
         '& .MuiOutlinedInput-root': {
             transition: 'all .5s ease-out',
-            marginBottom: 12,
             borderRadius: 6,
             '& input': {
                 padding: '8px 10px',
