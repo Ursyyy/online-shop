@@ -12,7 +12,7 @@ const App = () => {
         <ThemeProvider theme={Theme}>
             <Header/>
             <MainPage />
-            <Cart/>
+            {/* <Cart/> */}
         </ThemeProvider>
     )
 }

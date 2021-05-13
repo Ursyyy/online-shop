@@ -95,16 +95,6 @@ const useClasses = makeStyles(theme => ({
     loginForm: {
         borderRight: 'solid 1px #a6a5a5',
         paddingRight: 19,
-        '& .separator': {
-            display: 'inline-block',
-            color: '#a6a5a5',
-            backgroundColor: '#fff',
-            position: 'fixed',
-            fontSize: 14,
-            top: '50%',
-            left: '52.3%'
-
-        },
         '& .secondary': {
             '& .descr': {
                 color: '#00000080',

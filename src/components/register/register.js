@@ -47,7 +47,6 @@ const Register = ({open, close, changeAuth}) => {
                     <div className={classes.register}>
                         <Link to="#" color="primary" onClick={changeAuth}>Login</Link>
                     </div>
-                    <span className='separator'>or</span>
                 </div>
                 <div className='servicesBtn'>
                     <Typography className='label'>Register with</Typography>
