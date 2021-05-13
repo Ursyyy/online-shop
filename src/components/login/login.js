@@ -11,6 +11,9 @@ import { Typography, Link } from '@material-ui/core'
 
 const Login = ({open, close, changeAuth}) => {
     const classes = useClasses()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    
 
     return (
         <Dialog
