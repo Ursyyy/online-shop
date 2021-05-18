@@ -8,12 +8,30 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded'
 import useClasses from './classes'
 import { Typography, Link } from '@material-ui/core'
+import { loginUser } from '../../https/userAPI'
+import { EMAIL } from '../../utils/regexp'
 
 const Login = ({open, close, changeAuth}) => {
     const classes = useClasses()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     
+    const login = async () => {
+        console.log(email, password)
+        if(EMAIL.test(email) && password){
+            try {
+            await loginUser({
+                email, password
+                })
+            } catch(e) {
+                console.log(e)
+            }
+
+        } else {
+            console.log('Все плохо(')
+        }
+        
+    }
 
     return (
         <Dialog
@@ -27,15 +45,15 @@ const Login = ({open, close, changeAuth}) => {
             </DialogTitle>
             <DialogContent className={classes.content}>
                 <div className={classes.loginForm}>
-                    <Typography className='label'>Email or tel.number</Typography>
-                    <TextField className='inputField' type='text' variant="outlined" />
+                    <Typography className='label'>Email</Typography>
+                    <TextField className='inputField' onChange={e => setEmail(e.target.value)} type='text' variant="outlined" />
                     <Typography className='label'>Password</Typography>
-                    <TextField className='inputField' type="password" variant="outlined" />
+                    <TextField className='inputField' type="password" variant="outlined" onChange={e => setPassword(e.target.value)} />
                     <div className='secondary'>
                         <Link to="#" color="primary">Fogot password?</Link>
                     </div>
                     <DialogActions>
-                        <Button className={classes.loginBtn} onClick={close} color="primary">
+                        <Button className={classes.loginBtn} onClick={login} color="primary">
                             Login
                         </Button>
                     </DialogActions>

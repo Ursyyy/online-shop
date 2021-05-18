@@ -33,17 +33,28 @@ const Register = ({open, close, changeAuth}) => {
         }
     }
 
-    const register = () => {
+    const register = async () => {
         setErrors({})
         if(firstName && PHONE.test(phone) && EMAIL.test(email) && password){
-            console.log(true)
-            registerUser({
-                email, 
-                firstName, 
-                lastName, 
-                phone,
-                password
-            })
+            try {
+                await registerUser({
+                    email, 
+                    firstName, 
+                    lastName, 
+                    phone,
+                    password
+                })
+            } catch (e){
+                let newErrors = errors
+                if(e.status === 200){
+                    newErrors.email = e.message
+                }
+                if(e.status === 201){
+                    newErrors.phone = e.message
+                }
+                setErrors(newErrors)
+            }
+            
         } else {
             console.log(firstName , phone , email , password)
             console.log(errors.firstName , errors.phone , errors.email , password)
@@ -54,7 +65,7 @@ const Register = ({open, close, changeAuth}) => {
             if(!PHONE.test(phone)){
                 newErrors.phone = "Please enter your phone number"
             }
-            if(EMAIL.test(email)){
+            if(!EMAIL.test(email) ){
                 newErrors.email = "Please enter your email"
             }
             if(password === ''){
@@ -79,13 +90,13 @@ const Register = ({open, close, changeAuth}) => {
             <DialogContent className={classes.content}>
                 <div className={classes.loginForm}>
                     <Typography className='label'>First name</Typography>
-                    <TextField className='inputField' type='text' variant="outlined" error={errors.firstName !== undefined} helperText={errors.firstName} onChange={e => setFname(capitalize(e.target.value))}/>
+                    <TextField className='inputField' type='text' variant="outlined" error={typeof errors.firstName != 'undefined'} helperText={errors.firstName} onChange={e => setFname(capitalize(e.target.value))}/>
                     <Typography className='label'>Last name</Typography>
                     <TextField className='inputField' type='text' variant="outlined" onChange={e => setSname(capitalize(e.target.value))}/>
                     <Typography className='label'>Tel. number</Typography>
-                    <TextField className='inputField' pattern="[0-9]*" value={phone || ''} variant="outlined" error={errors.phone !== undefined} helperText={errors.phone} onChange={checkPhone}/>
+                    <TextField className='inputField' pattern="[0-9]*" value={phone || ''} variant="outlined" error={typeof errors.phone !== 'undefined'} helperText={errors.phone} onChange={checkPhone}/>
                     <Typography className='label'>Email</Typography>
-                    <TextField className='inputField' type='email' variant="outlined" error={errors.email !== undefined} helperText={errors.email} onChange={e => setEmail(e.target.value)}/>
+                    <TextField className='inputField' type='email' variant="outlined" error={typeof errors.email !== 'undefined'} helperText={errors.email} onChange={e => setEmail(e.target.value)}/>
                     <Typography className='label'>Password</Typography>
                     <TextField className='inputField' type="password" error={errors.password !== undefined} variant="outlined" onChange={e => setPassword(e.target.value)}/>
                     <div className='secondary'>
