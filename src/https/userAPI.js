@@ -1,5 +1,4 @@
 import axiosInstance from './axiosInstance'
-import axios from 'axios'
 const registerUser = async (userData, role="USER") => {
     const resp = await axiosInstance.put('/api/user/registration', {
         ...userData,

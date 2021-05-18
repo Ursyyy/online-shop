@@ -15,20 +15,31 @@ const Login = ({open, close, changeAuth}) => {
     const classes = useClasses()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    
+    const [emailError, setEmailError] = useState([false, ''])
+    const [passError, setPassError] = useState([false, '']) 
+
     const login = async () => {
-        console.log(email, password)
-        if(EMAIL.test(email) && password){
+        setEmailError([false, ''])
+        setPassError([false, ''])
+        if(EMAIL.test(email) && password.length >= 6 ){
             try {
             await loginUser({
                 email, password
                 })
             } catch(e) {
-                console.log(e)
+                if(e.message === 'user with this name was not found'){
+                    setEmailError([true, 'User with this name was not found'])
+                } else {
+                    setPassError([true, 'The password is incorrect'])
+                }
             }
 
         } else {
-            console.log('Все плохо(')
+            if(!EMAIL.test(email)){
+                setEmailError([true, 'The email must be like username@domen.com'])
+            } if(password.length < 6) {
+                setPassError([true, 'Password length must be at least 6 chars long'])
+            }
         }
         
     }
@@ -46,9 +57,9 @@ const Login = ({open, close, changeAuth}) => {
             <DialogContent className={classes.content}>
                 <div className={classes.loginForm}>
                     <Typography className='label'>Email</Typography>
-                    <TextField className='inputField' onChange={e => setEmail(e.target.value)} type='text' variant="outlined" />
+                    <TextField className='inputField' onChange={e => setEmail(e.target.value)} error={emailError[0]} helperText={emailError[1]} type='text' variant="outlined" />
                     <Typography className='label'>Password</Typography>
-                    <TextField className='inputField' type="password" variant="outlined" onChange={e => setPassword(e.target.value)} />
+                    <TextField className='inputField' type="password" variant="outlined" error={passError[0]} helperText={passError[1]} onChange={e => setPassword(e.target.value)} />
                     <div className='secondary'>
                         <Link to="#" color="primary">Fogot password?</Link>
                     </div>
