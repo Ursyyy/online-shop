@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded'
 import SearchIcon from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
-import { Button } from '@material-ui/core'
+import { Button} from '@material-ui/core'
 
 import useClasses from './classes'
 import Auth from '../auth/auth'
