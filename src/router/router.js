@@ -1,9 +1,9 @@
 import React, {Suspense, useEffect} from 'react'
-import { Redirect, Route } from 'react-router'
+import { Redirect, Route, Switch } from 'react-router-dom'
 
 
 const AppRouter = ({path, component: Component, isPrivate, redirect, props}) => {
-    const checkIsAuth = () => true
+    // const checkIsAuth = () => true
     useEffect(() => {
         console.log(path)
     }, [])
@@ -18,7 +18,15 @@ const AppRouter = ({path, component: Component, isPrivate, redirect, props}) => 
     )
 }
 
-export default AppRouter
+const MyRouter = ({routes}) => {
+    return (
+        <Switch>
+            {routes.map((route) => <AppRouter key={route.path} {...route} />)}
+        </Switch>
+    )
+}
+
+export default MyRouter
 
 
 /*{

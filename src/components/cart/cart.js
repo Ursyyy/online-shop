@@ -25,7 +25,6 @@ const Cart = ({open, close}) => {
                     <></>:
                     <div className='emptyCart'>
                         <svg 
-                            enable-background="new 0 0 256 256" 
                             height="512" 
                             viewBox="0 0 256 256" 
                             width="512" >

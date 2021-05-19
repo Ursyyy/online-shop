@@ -1,16 +1,12 @@
 import {lazy} from 'react'
 import {MAIN_PAGE, PRODUCTS_PAGE} from './paths'
-
+import MainPage from '../components/mainPage/mainPage'
+import ProductsList from '../components/productsList/productsList'
 const routes = [
-	{
-		path: MAIN_PAGE,
-		component: lazy(() => import('../components/mainPage/mainPage')),
-		exact: true,
-		isPrivate: false
-	},
+	
 	{
 		path: PRODUCTS_PAGE,
-		component: lazy(() => import('../components/productsList/productsList')),
+		component: ProductsList,
 		exact: false,
 		isPrivate: false,
 		routes: [
@@ -21,6 +17,12 @@ const routes = [
 				isPrivate: false,
 			}
 		]
+	},
+	{
+		path: MAIN_PAGE,
+		component: MainPage,
+		exact: false,
+		isPrivate: false
 	},
 ]
 

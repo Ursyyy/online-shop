@@ -12,6 +12,7 @@ const ProductsList = () => {
 
     useEffect(async () => {
         const data = await getAllProducts();
+        console.log(data)
         setProducts(data);
     },[])
     return (
