@@ -1,19 +1,18 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper'
+import Paper from '@material-ui/core/Paper';
 
-import useClasses from './classes'
+import useClasses from './classes';
 import { Typography } from '@material-ui/core';
 import { getAllProducts } from '../../https/productsAPI';
 
-const MainPage = () => {
-    const classes = useClasses()
-    const [products, setProducts] = useState([])
+const ProductsList = () => {
+    const classes = useClasses();
+    const [products, setProducts] = useState([]);
 
     useEffect(async () => {
-        const data = await getAllProducts()
-        console.log(data)
-        setProducts(data)
+        const data = await getAllProducts();
+        setProducts(data);
     },[])
     return (
         <Grid container className={classes.root}>
@@ -30,7 +29,7 @@ const MainPage = () => {
                 </Grid>
             </Grid>
         </Grid>
-    )
+    );
 }
 
-export default MainPage
+export default ProductsList;
