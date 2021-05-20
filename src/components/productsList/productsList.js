@@ -9,12 +9,14 @@ import { getAllProducts } from '../../https/productsAPI';
 const ProductsList = () => {
     const classes = useClasses();
     const [products, setProducts] = useState([]);
-
+    
     useEffect(async () => {
         const data = await getAllProducts();
+        console.log(window.location.pathname)
         console.log(data)
         setProducts(data);
     },[])
+
     return (
         <Grid container className={classes.root}>
             <Grid item xs={9}>
