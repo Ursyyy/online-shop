@@ -21,7 +21,15 @@ const AppRouter = ({path, component: Component, isPrivate, redirect, props}) => 
 const MyRouter = ({routes}) => {
     return (
         <Switch>
-            {routes.map((route) => <AppRouter key={route.path} {...route} />)}
+            {routes.map((route) => (
+                <Suspense fallback="Load..." key={route.path}>
+                    <Route 
+                        path={route.path} 
+                        render={ route => (<Component {...route}/>)}
+                        {...route}    
+                    />
+                </Suspense>
+            ))}
         </Switch>
     )
 }
