@@ -20,27 +20,33 @@ const ProductsList = () => {
     const addToCart = (item) => {
         console.log(state.cart)
         if(state.cart.id === -1){
-            localStorage.setItem('cart', JSON.stringify({
+            let cart = JSON.parse(localStorage.getItem('cart')) || {
+                id: -1,
+                products: []
+            }
+            console.log(cart)
+            cart.products.push({
                 quantity: 1,
-                product: {
+                products: {
                     name: item.id,
                     price: item.price,
                     id: item.id
                 }
-            }))
+            })
+            localStorage.setItem('cart', JSON.stringify(cart))
 
         } else {
-                // dispatch({
-                //     type: ADD_TO_CART,
-                //     payload: {
-                //         quantity: 1,
-                //         product: {
-                //             name: item.id,
-                //             price: item.price,
-                //             id: item.id
-                //         }
-                //     }
-                // })
+                dispatch({
+                    type: ADD_TO_CART,
+                    payload: {
+                        quantity: 1,
+                        product: {
+                            name: item.id,
+                            price: item.price,
+                            id: item.id
+                        }
+                    }
+                })
         }
         console.log(state)
     }
