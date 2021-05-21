@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -6,16 +6,26 @@ import Typography from '@material-ui/core/Typography'
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded'
 import SearchIcon from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
-import { Button} from '@material-ui/core'
+import { Button, Badge } from '@material-ui/core'
 
 import useClasses from './classes'
 import Auth from '../auth/auth'
 import Cart from '../cart/cart'
+import { StateContext } from '../../storage/context'
 
 const Header = () => {
 	const classes = useClasses()
 	const [openAuth, setAuth] = useState(false)
 	const [openCart, setCart] = useState(false)
+	const [state] = useContext(StateContext)
+
+	const authorise = () => {
+		if(Object.keys(state.user).length === 0 && state.user.constructor === Object){
+			
+		}
+		console.log(state.user)
+	}
+
 	return (
 		<>
 			<AppBar 
@@ -56,11 +66,13 @@ const Header = () => {
 							/>
 						</div>
 						<Tooltip title="Cart" aria-label="cart">
-							<svg onClick={() => setCart(true)} className='svg' height="475pt" viewBox="-16 0 475 475.40008" width="475pt" xmlns="http://www.w3.org/2000/svg">
-								<path d="m149.5 373.800781c-28.054688 0-50.800781 22.742188-50.800781 50.800781 0 28.054688 22.746093 50.796876 50.800781 50.796876s50.800781-22.742188 50.800781-50.796876c-.039062-28.042968-22.761719-50.761718-50.800781-50.800781zm0 0"/>
-								<path d="m363.398438 373.800781c-28.054688 0-50.796876 22.742188-50.796876 50.800781 0 28.054688 22.742188 50.796876 50.796876 50.796876 28.058593 0 50.800781-22.742188 50.800781-50.796876-.039063-28.042968-22.757813-50.761718-50.800781-50.800781zm0 0"/>
-								<path d="m440.5 97.699219c-1.886719-2.582031-4.898438-4.109375-8.101562-4.097657h-338.597657l-7.402343-43.601562c-4.855469-28.898438-29.894532-50.046875-59.199219-50h-17c-5.523438 0-10 4.476562-10 10s4.476562 10 10 10h17c19.527343-.078125 36.222656 14.035156 39.402343 33.300781l40.097657 236.300781c4.855469 28.894532 29.898437 50.046876 59.199219 50h228.203124c5.519532 0 10-4.480468 10-10 0-5.523437-4.480468-10-10-10h-228.101562c-19.527344.074219-36.222656-14.035156-39.398438-33.300781l-3.300781-19.199219h224.097657c26.214843.054688 49.40625-16.972656 57.203124-42l37.296876-118.5c.972656-3.023437.453124-6.324218-1.398438-8.902343zm0 0"/>
-							</svg>
+							<Badge badgeContent={state.cart.length} color="secondary">
+								<svg onClick={() => setCart(true)} className='svg' height="475pt" viewBox="-16 0 475 475.40008" width="475pt" xmlns="http://www.w3.org/2000/svg">
+									<path d="m149.5 373.800781c-28.054688 0-50.800781 22.742188-50.800781 50.800781 0 28.054688 22.746093 50.796876 50.800781 50.796876s50.800781-22.742188 50.800781-50.796876c-.039062-28.042968-22.761719-50.761718-50.800781-50.800781zm0 0"/>
+									<path d="m363.398438 373.800781c-28.054688 0-50.796876 22.742188-50.796876 50.800781 0 28.054688 22.742188 50.796876 50.796876 50.796876 28.058593 0 50.800781-22.742188 50.800781-50.796876-.039063-28.042968-22.757813-50.761718-50.800781-50.800781zm0 0"/>
+									<path d="m440.5 97.699219c-1.886719-2.582031-4.898438-4.109375-8.101562-4.097657h-338.597657l-7.402343-43.601562c-4.855469-28.898438-29.894532-50.046875-59.199219-50h-17c-5.523438 0-10 4.476562-10 10s4.476562 10 10 10h17c19.527343-.078125 36.222656 14.035156 39.402343 33.300781l40.097657 236.300781c4.855469 28.894532 29.898437 50.046876 59.199219 50h228.203124c5.519532 0 10-4.480468 10-10 0-5.523437-4.480468-10-10-10h-228.101562c-19.527344.074219-36.222656-14.035156-39.398438-33.300781l-3.300781-19.199219h224.097657c26.214843.054688 49.40625-16.972656 57.203124-42l37.296876-118.5c.972656-3.023437.453124-6.324218-1.398438-8.902343zm0 0"/>
+								</svg>
+							</Badge>
 						</Tooltip>
 						<Tooltip title="Profile" aria-label="profile">
 							<svg onClick={() => setAuth(true)} className='svg' viewBox="-42 0 512 512.002" xmlns="http://www.w3.org/2000/svg">

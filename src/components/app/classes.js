@@ -6,6 +6,9 @@ const secCol = '#3B8AC4'
 const thirdCol = '#345DA7'
 
 const useClasses = makeStyles((theme) => ({
+    body: {
+        paddingBottom: 70
+    }
 }))
 
 const Theme = createMuiTheme({

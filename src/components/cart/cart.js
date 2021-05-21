@@ -1,14 +1,20 @@
-import React, {useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded'
 import useClasses from './classes'
 import { Typography } from '@material-ui/core'
+import { StateContext } from '../../storage/context'
 
 const Cart = ({open, close}) => {
     const classes = useClasses()
     const [cart, setCart] = useState([])
+    const [state] = useContext(StateContext)
+
+    useEffect(_ => {
+        setCart(state.cart)
+    },[])
     return (
         <Dialog
             className={classes.dialog}
@@ -22,7 +28,10 @@ const Cart = ({open, close}) => {
             </DialogTitle>
             <DialogContent className={classes.content}>
                 {cart.length ? 
-                    <></>:
+                    <>
+                        {cart}
+                    </>
+                    :
                     <div className='emptyCart'>
                         <svg 
                             height="512" 

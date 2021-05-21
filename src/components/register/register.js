@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -10,6 +10,9 @@ import { Typography, Link } from '@material-ui/core'
 import useClasses from './classes'
 import { EMAIL, INPUT_PHONE, PHONE } from '../../utils/regexp'
 import { registerUser } from '../../https/userAPI'
+import { StateContext } from '../../storage/context'
+import { SET_USER } from '../../storage/types'
+
 
 const Register = ({open, close, changeAuth}) => {
     const classes = useClasses()
@@ -18,7 +21,7 @@ const Register = ({open, close, changeAuth}) => {
     const [phone, setPhone] = useState(null)
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState('')
-
+    const [state, dispatch] = useContext(StateContext)
     const [errors, setErrors] = useState({})
 
     const capitalize = str => {
@@ -44,6 +47,17 @@ const Register = ({open, close, changeAuth}) => {
                     phone,
                     password
                 })
+                dispatch({
+                    type: SET_USER,
+                    payload: {
+                        email, 
+                        firstName, 
+                        lastName, 
+                        phone,
+                        role: 'USER'
+                    }
+                })
+                close()
             } catch (e){
                 let newErrors = errors
                 if(e.status === 200){

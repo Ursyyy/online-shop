@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -10,6 +10,8 @@ import useClasses from './classes'
 import { Typography, Link } from '@material-ui/core'
 import { loginUser } from '../../https/userAPI'
 import { EMAIL } from '../../utils/regexp'
+import { StateContext } from '../../storage/context'
+import { SET_USER } from '../../storage/types'
 
 const Login = ({open, close, changeAuth}) => {
     const classes = useClasses()
@@ -17,16 +19,23 @@ const Login = ({open, close, changeAuth}) => {
     const [password, setPassword] = useState('')
     const [emailError, setEmailError] = useState([false, ''])
     const [passError, setPassError] = useState([false, '']) 
-
+    const [state, dispatch] = useContext(StateContext)
     const login = async () => {
         setEmailError([false, ''])
         setPassError([false, ''])
         if(EMAIL.test(email) && password.length >= 6 ){
             try {
-            await loginUser({
-                email, password
+                const userData = await loginUser({
+                    email, password
                 })
+                dispatch({
+                    type: SET_USER,
+                    payload: userData
+                })
+                close()
+                
             } catch(e) {
+                console.log(e)
                 if(e.message === 'user with this name was not found'){
                     setEmailError([true, 'User with this name was not found'])
                 } else {

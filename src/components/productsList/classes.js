@@ -22,18 +22,35 @@ const useClasses = makeStyles(theme => ({
             margin: '30px 10px 0',
         },
         '& .title': {
-            margin: '5px 0',
+            margin: '5px 0 5px 10px' ,
             fontSize: 15,
         },
-        '& .price': {
-            fontSize: 20,
-            color: '#e84343',
-            '&::after': {
-                content: 'ass',//'₴',
+        '& .controll': {
+            marginLeft: 10,
+            display: 'flex',
+            '& .price': {
+                fontSize: 20,
                 color: '#e84343',
-                fontSize: 15
+                '&::after': {
+                    content: 'ass',//'₴',
+                    color: '#e84343',
+                    fontSize: 15
+                },
             },
+            '& svg': {
+                width: 25,
+                height: 25,
+                marginLeft: 'auto',
+                marginRight: 10,
+                padding: 4,
+                transition: 'all .2s ease-out',
+                '&:hover': {
+                    borderRadius: 8,
+                    background: '#e9e9e9'                
+                }
+            }
         },
+        
         '& .descr': {
             display: 'none',
             fontSize: 13,

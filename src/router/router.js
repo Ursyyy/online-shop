@@ -1,12 +1,9 @@
-import React, {Suspense, useEffect} from 'react'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import React, {Suspense} from 'react'
+import { Redirect, Route} from 'react-router-dom'
 
 
 const AppRouter = ({path, component: Component, isPrivate, redirect, props}) => {
     // const checkIsAuth = () => true
-    useEffect(() => {
-        console.log(path)
-    }, [])
     return (
         <Suspense fallback="Load...">
             <Route 

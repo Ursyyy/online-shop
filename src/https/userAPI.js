@@ -8,7 +8,6 @@ const registerUser = async (userData, role="USER") => {
         throw resp.data
     }
     localStorage.setItem('token', resp.data.token)
-    console.log(resp)
 }
 
 
@@ -19,9 +18,28 @@ const loginUser = async (userData) => {
     if(resp.data.message){
         throw resp.data
     }
-    console.log(resp)
     localStorage.setItem('token', resp.data.token)
+    return {
+        id: resp.data.id,
+        email: resp.data.email,
+        role: resp.data.role,
+        firstName: resp.data.firstName,
+        lastName: resp.data.lastName,
+        phone: resp.data.phone
+    }
+}
+
+const getUser = async _ => {
+    const resp = await axiosInstance.get('/api/user')
+    if(resp.data.message) {
+        return {user: {}, cart: []}
+    }
+    localStorage.setItem('token', resp.data.token)
+    return {
+        user: resp.data.user, 
+        cart: resp.data.basket
+    }
 }
 
 
-export {registerUser, loginUser}
+export {registerUser, loginUser, getUser}
