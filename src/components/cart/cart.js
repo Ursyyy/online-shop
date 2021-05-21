@@ -9,12 +9,13 @@ import { StateContext } from '../../storage/context'
 
 const Cart = ({open, close}) => {
     const classes = useClasses()
-    const [cart, setCart] = useState([])
     const [state] = useContext(StateContext)
+    const [cart, setCart] = useState(state.cart)
 
     useEffect(_ => {
-        setCart(state.cart)
+        console.log(state.cart)
     },[])
+
     return (
         <Dialog
             className={classes.dialog}
@@ -27,9 +28,9 @@ const Cart = ({open, close}) => {
                 <CloseRoundedIcon onClick={close}/>
             </DialogTitle>
             <DialogContent className={classes.content}>
-                {cart.length ? 
+                {   state.cart.products ? 
                     <>
-                        {cart}
+                        <Typography>{cart.products.length}</Typography>
                     </>
                     :
                     <div className='emptyCart'>

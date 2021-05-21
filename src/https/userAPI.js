@@ -32,7 +32,10 @@ const loginUser = async (userData) => {
 const getUser = async _ => {
     const resp = await axiosInstance.get('/api/user')
     if(resp.data.message) {
-        return {user: {}, cart: []}
+        return {user: {}, cart: {
+            id: -1,
+            products: []
+        },}
     }
     localStorage.setItem('token', resp.data.token)
     return {

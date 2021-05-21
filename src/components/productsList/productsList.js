@@ -18,17 +18,31 @@ const ProductsList = () => {
     },[])
 
     const addToCart = (item) => {
-        dispatch({
-            type: ADD_TO_CART,
-            payload: {
+        console.log(state.cart)
+        if(state.cart.id === -1){
+            localStorage.setItem('cart', JSON.stringify({
                 quantity: 1,
                 product: {
                     name: item.id,
                     price: item.price,
                     id: item.id
                 }
-            }
-        })
+            }))
+
+        } else {
+                // dispatch({
+                //     type: ADD_TO_CART,
+                //     payload: {
+                //         quantity: 1,
+                //         product: {
+                //             name: item.id,
+                //             price: item.price,
+                //             id: item.id
+                //         }
+                //     }
+                // })
+        }
+        console.log(state)
     }
 
     return (
@@ -42,7 +56,8 @@ const ProductsList = () => {
                             <div className="controll">
                                 <Typography className='price'>{item.price}₴</Typography>
                                 <svg x="0px" y="0px"
-                                        viewBox="0 0 512 512" space="preserve">
+                                    onClick={() => addToCart(item)}
+                                    viewBox="0 0 512 512" space="preserve">
                                     <path fill="#d6c3b4" d="M394.667,256C318.122,255.906,256.094,193.878,256,117.333c0-3.605,0.277-7.125,0.533-10.667H96
                                         c-5.891,0.005-10.662,4.785-10.657,10.677c0.001,0.655,0.062,1.309,0.182,1.953l32,170.667c0.944,5.043,5.344,8.699,10.475,8.704
                                         h292.992c26.9,0.003,49.592-20.027,52.928-46.72l2.901-23.168C453.072,246.443,424.265,255.988,394.667,256z"/>
