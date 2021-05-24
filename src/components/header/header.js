@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -19,12 +19,8 @@ const Header = () => {
 	const [openCart, setCart] = useState(false)
 	const [state] = useContext(StateContext)
 
-	const authorise = () => {
-		if(Object.keys(state.user).length === 0 && state.user.constructor === Object){
-			
-		}
-		console.log(state.user)
-	}
+	useEffect(_ => {
+	},[state.cart, localStorage.getItem('cart')])
 
 	return (
 		<>
@@ -84,7 +80,7 @@ const Header = () => {
 				</Toolbar>
 			</AppBar>
 			<Auth open={openAuth} setOpen={param => setAuth(param)}/>
-			<Cart open={openCart} close={() => setCart(false)}/>
+			<Cart open={openCart} close={() => setCart(false)} cart={state.cart}/>
 		</>
 	)
 }

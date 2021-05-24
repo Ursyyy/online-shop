@@ -21,9 +21,10 @@ const App = () => {
             userData.user = {}
             userData.cart = {
                 id: -1,
-                basket_products: []
+                basket_products: JSON.parse(localStorage.getItem('products')) || []
             }
         } finally {
+            console.log(userData)
             dispatch({
                 type: SET_USER,
                 payload: userData.user
@@ -35,6 +36,7 @@ const App = () => {
                     products: userData.cart.basket_products
                 }
             })
+            console.log(state)
         }
     },[])
 

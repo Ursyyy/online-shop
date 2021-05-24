@@ -6,7 +6,7 @@ import useClasses from './classes';
 import { Typography } from '@material-ui/core';
 import { getAllProducts } from '../../https/productsAPI';
 import { StateContext } from '../../storage/context';
-import { ADD_TO_CART } from '../../storage/types';
+import { ADD_TO_CART, SET_CART } from '../../storage/types';
 
 const ProductsList = () => {
     const classes = useClasses();
@@ -18,37 +18,42 @@ const ProductsList = () => {
     },[])
 
     const addToCart = (item) => {
-        console.log(state.cart)
+        let products;
+        console.log(state)
         if(state.cart.id === -1){
-            let cart = JSON.parse(localStorage.getItem('cart')) || {
-                id: -1,
-                products: []
+            products = JSON.parse(localStorage.getItem('products')) || []
+        } else {
+            products = state.cart.products
+        }
+        if(!products.some(product => {
+            if(product.product.id === item.id){
+                product.quantity++
+                return true
             }
-            console.log(cart)
-            cart.products.push({
+            return false
+        })) {
+            products.push({
                 quantity: 1,
-                products: {
-                    name: item.id,
+                product: {
+                    name: item.name,
                     price: item.price,
-                    id: item.id
+                    id: item.id,
+                    img: item.img
                 }
             })
-            localStorage.setItem('cart', JSON.stringify(cart))
-
-        } else {
-                dispatch({
-                    type: ADD_TO_CART,
-                    payload: {
-                        quantity: 1,
-                        product: {
-                            name: item.id,
-                            price: item.price,
-                            id: item.id
-                        }
-                    }
-                })
         }
-        console.log(state)
+        if(state.cart.id === -1) {
+            localStorage.setItem('products', JSON.stringify(products))
+        } else {
+            //Запрос на добавление в корзину
+        }
+        dispatch({
+            type: SET_CART,
+            payload: {
+                id: state.cart.id,
+                products
+            }
+        })
     }
 
     return (

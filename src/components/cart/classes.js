@@ -4,7 +4,7 @@ const useClasses = makeStyles(theme => ({
     dialog: {
         '& .MuiPaper-root': {
             zIndex: 5,
-            minWidth: 300,
+            minWidth: 500,
             border: '1px solid #dadce0',
             borderRadius: 12,
             padding: '5px 8px 8px',
@@ -51,6 +51,58 @@ const useClasses = makeStyles(theme => ({
             }
         }       
     },
+    productsList: {
+        listStyle: 'none',
+        paddingInlineStart: 0,
+        '& .product-item': {
+            marginBottom: 20,
+            display: 'flex',
+            '& img': {
+                maxWidth: 70,
+                maxHeight: 70
+            },
+            '& .title': {
+                fontFamily: 'Montserrat',
+                fontSize: 22,
+                marginLeft: 10,
+                minWidth: 150,
+            },
+            '& .quantity': {
+                margin: 'auto 10px auto 30px',
+                padding: '4px 4px',
+                display: 'flex',
+                '& .quantity-count': {
+                    padding: '7px 3px',
+                    textAlign: 'center',
+                    appearance: 'none',
+                    textDecoration: 'none',
+                    borderRadius: 5,
+                    width: 30,
+                    border: 'solid 1px #e9e9e9',
+                    '&:hover': {
+                        borderColor: '#a6a5a5'                 
+                    },
+                    '&:focus-visible': {
+                        borderColor: '#a6a5a5'
+                    }
+                },
+                '& .change-count': {
+                    fontSize: 30,
+                    margin: '0 8px',
+                    color: '#3B8AC4',
+                    '&:hover': {
+                        cursor: 'pointer'
+                    },
+                    '&.disabled': {
+                        color: '#a6a5a5',
+                        '&:hover': {
+                            cursor: 'default'
+                        },
+                    }
+                }
+            }
+        }
+    }
     
 }))
 

@@ -15,10 +15,12 @@ const loginUser = async (userData) => {
     const resp = await axiosInstance.post('/api/user/login', {
         ...userData,
     })
+    console.log(resp)
     if(resp.data.message){
         throw resp.data
     }
     localStorage.setItem('token', resp.data.token)
+    console.log('145')
     return {
         id: resp.data.id,
         email: resp.data.email,
@@ -34,7 +36,7 @@ const getUser = async _ => {
     if(resp.data.message) {
         return {user: {}, cart: {
             id: -1,
-            products: []
+            basket_products: JSON.parse(localStorage.getItem('products')) || []
         },}
     }
     localStorage.setItem('token', resp.data.token)

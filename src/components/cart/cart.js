@@ -1,21 +1,17 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext} from 'react'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded'
 import useClasses from './classes'
-import { Typography } from '@material-ui/core'
+import { Typography, TextField } from '@material-ui/core'
 import { StateContext } from '../../storage/context'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
 
-const Cart = ({open, close}) => {
+const Cart = ({open, close, cart}) => {
     const classes = useClasses()
     const [state] = useContext(StateContext)
-    const [cart, setCart] = useState(state.cart)
-
-    useEffect(_ => {
-        console.log(state.cart)
-    },[])
-
+    // const [cart, setCart] = useState(state.cart)
     return (
         <Dialog
             className={classes.dialog}
@@ -28,9 +24,24 @@ const Cart = ({open, close}) => {
                 <CloseRoundedIcon onClick={close}/>
             </DialogTitle>
             <DialogContent className={classes.content}>
-                {   state.cart.products ? 
+                {   state.cart.products.length > 0 ? 
                     <>
-                        <Typography>{cart.products.length}</Typography>
+                        <ul className={classes.productsList}>
+                            {state.cart.products.map(product => {
+                                return (
+                                    <li key={product.product.id} className='product-item'>
+                                        <img src={`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_PORT}/${product.product.img}`}/>
+                                        <Typography className='title'>{product.product.name}</Typography>
+                                        <div className='quantity'>
+                                            <div className={product.quantity > 1 ? 'change-count' : 'change-count disabled'}>-</div>
+                                            <Typography className='quantity-count'>{product.quantity}</Typography>
+                                            <div className='change-count'>+</div>
+                                        </div>
+                                        <MoreVertIcon color='primary'/>
+                                    </li>
+                                )
+                            })}
+                        </ul>
                     </>
                     :
                     <div className='emptyCart'>
