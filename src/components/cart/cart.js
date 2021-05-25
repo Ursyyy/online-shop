@@ -1,17 +1,61 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded'
 import useClasses from './classes'
-import { Typography, TextField } from '@material-ui/core'
+import { Typography, TextField, Button } from '@material-ui/core'
 import { StateContext } from '../../storage/context'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
+import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined'
+import { REMOVE_ITEM, SET_ITEM_IN_CART } from '../../storage/types'
 
 const Cart = ({open, close, cart}) => {
     const classes = useClasses()
-    const [state] = useContext(StateContext)
-    // const [cart, setCart] = useState(state.cart)
+    const [state, dispatch] = useContext(StateContext)
+    const [allPrice, setPrice] = useState(state.price)
+
+    const changeQuantity = (type, index )=> {
+        const item = cart[index]
+        if(type === 'add'){
+            item.quantity++
+        } else if(type === 'remove' && item.quantity > 1){
+            item.quantity--
+        } else {
+            return
+        }
+        dispatch({
+            type: SET_ITEM_IN_CART,
+            payload: {
+                index,
+                item
+            }
+        })
+        if(cart.id === -1){
+            localStorage.setItem('products', JSON.stringify(cart))
+        }
+    }
+    
+    const removeFromCart = async index => {
+        await dispatch({
+            type: REMOVE_ITEM,
+            payload: {
+                index
+            }
+        })
+        if(cart.id === -1){
+            localStorage.setItem('products', JSON.stringify(cart))
+        }
+    }
+
+    useEffect( _ => {
+        let newPrice = 0
+        // cart.map(product => {
+        //     newPrice += product.quantity * product.price
+        // })
+        console.log(cart)
+        setPrice(newPrice)
+    }, [state])
+
     return (
         <Dialog
             className={classes.dialog}
@@ -24,25 +68,34 @@ const Cart = ({open, close, cart}) => {
                 <CloseRoundedIcon onClick={close}/>
             </DialogTitle>
             <DialogContent className={classes.content}>
-                {   state.cart.products.length > 0 ? 
-                    <>
+                {   state.cart.length > 0 ? 
+                    <div className={classes.cart}>
                         <ul className={classes.productsList}>
-                            {state.cart.products.map(product => {
+                            {state.cart.map((product, index) => {
                                 return (
-                                    <li key={product.product.id} className='product-item'>
-                                        <img src={`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_PORT}/${product.product.img}`}/>
-                                        <Typography className='title'>{product.product.name}</Typography>
+                                    <li key={product.id} className='product-item'>
+                                        <img src={`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_PORT}/${product.img}`}/>
+                                        <Typography className='title'>{product.name}</Typography>
                                         <div className='quantity'>
-                                            <div className={product.quantity > 1 ? 'change-count' : 'change-count disabled'}>-</div>
+                                            <div className={product.quantity > 1 ? 'change-count' : 'change-count disabled'} onClick={_ => changeQuantity('remove', index)}>-</div>
                                             <Typography className='quantity-count'>{product.quantity}</Typography>
-                                            <div className='change-count'>+</div>
+                                            <div className='change-count' onClick={_ => changeQuantity('add', index)}>+</div>
                                         </div>
-                                        <MoreVertIcon color='primary'/>
+                                        <div className='price-block'>
+                                            <Typography className='product-price'>{(product.quantity * product.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</Typography>
+                                        </div>
+                                        <CloseOutlinedIcon className='icon' color='secondary' onClick={_ => removeFromCart(index)} />
                                     </li>
                                 )
                             })}
                         </ul>
-                    </>
+                        <div className={classes.orderBlock}>
+                            <div className='create-order'> 
+                                <Typography className='order-price'>{allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</Typography>
+                                <Button className='create-order-button'>Create order</Button>
+                            </div>
+                        </div>
+                    </div>
                     :
                     <div className='emptyCart'>
                         <svg 

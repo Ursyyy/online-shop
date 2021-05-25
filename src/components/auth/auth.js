@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react'
 import { StateContext } from '../../storage/context'
+import { isUserLogined } from '../../utils/isUserLogined'
 import Login from '../login/login'
 import Register from '../register/register'
 
@@ -14,7 +15,7 @@ const Auth = ({open, setOpen}) => {
 
     return (
         <>
-            {   Object.keys(state.user).length === 0 && state.user.constructor === Object ?
+            {   isUserLogined(state.user) ?
                     isLogin ? 
                         <Login open={open && isLogin} close={closeHandler} changeAuth={() => setLogin(!isLogin)}/> 
                         :<Register open={open && !isLogin} close={closeHandler} changeAuth={() => setLogin(!isLogin)}/> 

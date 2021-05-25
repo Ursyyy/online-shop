@@ -48,7 +48,7 @@ const useClasses = makeStyles(theme => ({
 	btnGroup: {
 		display: 'flex',
 		marginLeft: 'auto',
-		marginRight: 10, 
+		marginRight: 35, 
 		'& .MuiBadge-anchorOriginTopRightRectangle': {
 			top: 5,
 			right: 5

@@ -1,9 +1,9 @@
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles'
 
 // const backCol = '#EFDBCB'
-// const primCol = '#4BB4DE'
-const secCol = '#3B8AC4'
-const thirdCol = '#345DA7'
+const infoCol = '#4BB4DE'
+const primCol = '#3B8AC4'
+const secondaryColor = '#345DA7'
 
 const useClasses = makeStyles((theme) => ({
     body: {
@@ -14,10 +14,14 @@ const useClasses = makeStyles((theme) => ({
 const Theme = createMuiTheme({
     palette: {
         primary: {
-            main: secCol,
+            main: primCol,
         },
         secondary: {
-            main: thirdCol
+            main: secondaryColor
+        },
+        info: {
+            main: infoCol,
+            light: '#c3eafa'
         }
     }
 })

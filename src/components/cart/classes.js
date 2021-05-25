@@ -4,7 +4,7 @@ const useClasses = makeStyles(theme => ({
     dialog: {
         '& .MuiPaper-root': {
             zIndex: 5,
-            minWidth: 500,
+            minWidth: 650,
             border: '1px solid #dadce0',
             borderRadius: 12,
             padding: '5px 8px 8px',
@@ -51,15 +51,19 @@ const useClasses = makeStyles(theme => ({
             }
         }       
     },
+    cart: {
+        width: '100%'
+    },
     productsList: {
         listStyle: 'none',
         paddingInlineStart: 0,
+        width: '100%',
         '& .product-item': {
-            marginBottom: 20,
+            marginBottom: 25,
             display: 'flex',
             '& img': {
-                maxWidth: 70,
-                maxHeight: 70
+                maxWidth: 80,
+                maxHeight: 80
             },
             '& .title': {
                 fontFamily: 'Montserrat',
@@ -68,7 +72,8 @@ const useClasses = makeStyles(theme => ({
                 minWidth: 150,
             },
             '& .quantity': {
-                margin: 'auto 10px auto 30px',
+                margin: 'auto',
+                marginRight: 30,
                 padding: '4px 4px',
                 display: 'flex',
                 '& .quantity-count': {
@@ -89,7 +94,7 @@ const useClasses = makeStyles(theme => ({
                 '& .change-count': {
                     fontSize: 30,
                     margin: '0 8px',
-                    color: '#3B8AC4',
+                    color: theme.palette.primary.main,
                     '&:hover': {
                         cursor: 'pointer'
                     },
@@ -100,8 +105,59 @@ const useClasses = makeStyles(theme => ({
                         },
                     }
                 }
+            },
+            '& .price-block': {
+                width: '23%',
+                '& .product-price': {
+                    marginTop: 24,
+                    fontSize: 20,
+                    marginRight: 5,
+                    '&:after': {
+                        content: '" ₴"',
+                        fontSize: 17
+    
+                    }
+                },
+            },
+            '& .icon': {
+                fontSize: 20,
+                '&:hover': {
+                    fill: theme.palette.info.main
+                }
             }
+            
         }
+    },
+
+    orderBlock: {
+        display: 'flex',
+        '& .create-order':{
+            display: 'flex',
+            marginLeft: 'auto',
+            border: `solid 1px ${theme.palette.primary.main}`,
+            borderRadius: 10,
+            background: theme.palette.info.light,
+            padding: '15px 20px',
+            '& .order-price': {
+                fontSize: 18,
+                margin: 'auto',
+                marginRight: 15,
+                '&:after': {
+                    content: '" ₴"',
+                    fontSize: 15
+                }
+            },
+            '& .create-order-button': {
+                background: theme.palette.primary.main,
+                color: '#fff',
+                padding: '10px 18px',
+                borderRadius: 6,
+                '&:hover': {
+                    background: '#3da0eb'
+                }
+            }
+        },
+        
     }
     
 }))

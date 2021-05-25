@@ -54,7 +54,7 @@ const useClasses = makeStyles(theme => ({
                 }
             },
             '& .buy-button': {
-                background: '#3B8AC4',
+                background: theme.palette.primary.main,
                 color: '#fff',
                 padding: '8px 50px'
             }

@@ -17,26 +17,18 @@ const App = () => {
         try {
             userData = await getUser()
         } catch (e){
-            console.log(e)
             userData.user = {}
-            userData.cart = {
-                id: -1,
-                basket_products: JSON.parse(localStorage.getItem('products')) || []
-            }
+            userData.cart =  JSON.parse(localStorage.getItem('products')) || []
         } finally {
-            console.log(userData)
             dispatch({
                 type: SET_USER,
                 payload: userData.user
             })
             dispatch({
                 type: SET_CART,
-                payload: {
-                    id: userData.cart.id,
-                    products: userData.cart.basket_products
-                }
+                payload: userData.cart
+
             })
-            console.log(state)
         }
     },[])
 

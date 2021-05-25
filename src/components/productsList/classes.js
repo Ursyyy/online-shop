@@ -32,9 +32,9 @@ const useClasses = makeStyles(theme => ({
                 fontSize: 20,
                 color: '#e84343',
                 '&::after': {
-                    content: 'ass',//'₴',
+                    content: '" ₴"',
                     color: '#e84343',
-                    fontSize: 15
+                    fontSize: 17
                 },
             },
             '& svg': {

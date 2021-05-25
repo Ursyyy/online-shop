@@ -7,6 +7,7 @@ import { Typography } from '@material-ui/core';
 import { getAllProducts } from '../../https/productsAPI';
 import { StateContext } from '../../storage/context';
 import { ADD_TO_CART, SET_CART } from '../../storage/types';
+import { isUserLogined } from '../../utils/isUserLogined';
 
 const ProductsList = () => {
     const classes = useClasses();
@@ -19,40 +20,34 @@ const ProductsList = () => {
 
     const addToCart = (item) => {
         let products;
-        console.log(state)
-        if(state.cart.id === -1){
+        if(isUserLogined(state.user)){
             products = JSON.parse(localStorage.getItem('products')) || []
         } else {
-            products = state.cart.products
+            products = state.cart
         }
         if(!products.some(product => {
-            if(product.product.id === item.id){
-                product.quantity++
+            if(product.id === item.id){
+                // product.quantity++
                 return true
             }
             return false
         })) {
             products.push({
                 quantity: 1,
-                product: {
-                    name: item.name,
-                    price: item.price,
-                    id: item.id,
-                    img: item.img
-                }
+                name: item.name,
+                price: item.price,
+                id: item.id,
+                img: item.img
             })
         }
-        if(state.cart.id === -1) {
+        if(isUserLogined(state.user)) {
             localStorage.setItem('products', JSON.stringify(products))
         } else {
             //Запрос на добавление в корзину
         }
         dispatch({
             type: SET_CART,
-            payload: {
-                id: state.cart.id,
-                products
-            }
+            payload: products
         })
     }
 
@@ -65,7 +60,7 @@ const ProductsList = () => {
                             <img src={`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_PORT}/${item.img}`}/>
                             <Typography className='title'>{item.name}</Typography>
                             <div className="controll">
-                                <Typography className='price'>{item.price}₴</Typography>
+                                <Typography className='price'>{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</Typography>
                                 <svg x="0px" y="0px"
                                     onClick={() => addToCart(item)}
                                     viewBox="0 0 512 512" space="preserve">

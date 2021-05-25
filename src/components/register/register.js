@@ -12,6 +12,7 @@ import { EMAIL, INPUT_PHONE, PHONE } from '../../utils/regexp'
 import { registerUser } from '../../https/userAPI'
 import { StateContext } from '../../storage/context'
 import { SET_USER } from '../../storage/types'
+import { createCart } from '../../https/cartAPI'
 
 
 const Register = ({open, close, changeAuth}) => {
@@ -56,7 +57,18 @@ const Register = ({open, close, changeAuth}) => {
                         phone,
                         role: 'USER'
                     }
-                })
+                }) 
+                if(state.cart.products.length > 0){
+                    console.log(state.cart.products)
+                    const products = state.cart.products
+                    let items = products.map(product => {
+                        return {
+                            quantity: product.quantity,
+                            productId: product.product.id
+                        }
+                    })
+                    await createCart(items)
+                }
                 close()
             } catch (e){
                 let newErrors = errors
