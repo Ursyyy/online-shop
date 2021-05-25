@@ -1,0 +1,7 @@
+export const SET_USER = 'set_user'
+export const SET_CART = 'set_cart'
+export const ADD_TO_CART = 'add_to_cart'
+export const CLEAR = 'clear'
+export const SET_ITEM_IN_CART = 'set_item_in_cart'
+export const REMOVE_ITEM = 'remove_item'
+export const SET_CART_ID = 'set_cart_id'

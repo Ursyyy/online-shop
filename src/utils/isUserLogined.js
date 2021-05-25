@@ -1,0 +1,1 @@
+export const isUserLogined = user => Object.keys(user).length === 0 && user.constructor === Object
