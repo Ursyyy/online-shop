@@ -1,5 +1,5 @@
 import React, {Suspense} from 'react'
-import { Redirect, Route} from 'react-router-dom'
+import { Route} from 'react-router-dom'
 
 
 const AppRouter = ({path, component: Component, isPrivate, redirect, props}) => {

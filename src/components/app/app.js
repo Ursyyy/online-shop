@@ -13,6 +13,7 @@ const App = () => {
     const classes = useClasses()
     const [state, dispatch] = useContext(StateContext)
     useEffect(async _ => {
+        
         let userData = {}
         try {
             userData = await getUser()
@@ -29,6 +30,7 @@ const App = () => {
                 payload: userData.cart
 
             })
+            
         }
     },[])
 

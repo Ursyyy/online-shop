@@ -1,20 +1,41 @@
 import axiosInstance from './axiosInstance'
 
+const getCart = async _ => {
+    let cart;
+    try {
+        const resp = await axiosInstance.get('/api/basket/')
+        cart = resp.data
+    } catch (e) {
+        cart = {products: []}
+    } finally {
+        return cart
+    }
+    
+}
+
 const addToCart = async item => {
-    const resp = await axiosInstance.post('/api/basket/', {
-        productId: item.id,
-        quantity: item.quantity
-    })
-    return resp
+    try {
+        await axiosInstance.put('/api/basket/', item)
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 const createCart = async items => {
-    await axiosInstance.post('/api/basket/', items)
-
+    try {
+        await axiosInstance.post('/api/basket/', items)
+    } catch (e) {
+        console.log(e)
+    }
+    
 }
 
 const removeItem = async item => {
-    const resp = await axiosInstance.post()
+    try {
+        await axiosInstance.post('/api/basket/del', item)
+    } catch (e) {
+        console.log(e)
+    }
 }
 
-export {addToCart, createCart}
+export {addToCart, createCart, getCart, removeItem}

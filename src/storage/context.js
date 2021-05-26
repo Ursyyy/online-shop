@@ -5,6 +5,7 @@ import Reducer from './reducer'
 const init = {
     user: { },
     cart: [],
+    isHeaderOpen: true,
 }
 
 const StateContext = createContext()

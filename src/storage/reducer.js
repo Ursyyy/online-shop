@@ -1,4 +1,4 @@
-import { ADD_TO_CART, CLEAR, REMOVE_ITEM, SET_CART, SET_CART_ID, SET_ITEM_IN_CART, SET_USER } from "./types";
+import { ADD_TO_CART, CLEAR, REMOVE_ITEM, SET_CART, SET_CART_ID, SET_HEADER, SET_ITEM_IN_CART, SET_USER } from "./types";
 
 const Reducer = (state, action) => {
     let cart;
@@ -27,15 +27,11 @@ const Reducer = (state, action) => {
                 ...state,
                 cart
             }
-        // case SET_CART_ID:
-        //     const products = state.cart
-        //     return {
-        //         ...state,
-        //         cart: {
-        //             id: action.payload,
-        //             products
-        //         }
-        //     }    
+        case SET_HEADER: 
+            return {
+                ...state,
+                isHeaderOpen: action.payload
+            }   
         case REMOVE_ITEM: 
             cart = state.cart
             cart.splice(action.payload.index, 1)

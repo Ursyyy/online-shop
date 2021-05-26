@@ -11,7 +11,7 @@ const useClasses = makeStyles(theme => ({
         width: 200,
         zIndex: 10,
         wordBreak: 'break-all',
-        border: 'solid 1px #00000025',
+        border: 'solid 1px #e9e9e9',
         borderRadius: 0,
         overflow: 'hidden',
         padding: '0 10px 13px',

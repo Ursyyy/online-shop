@@ -31,8 +31,6 @@ const loginUser = async (userData) => {
 
 const getUser = async _ => {
     const resp = await axiosInstance.get('/api/user')
-    console.log(resp.data)
-
     if(resp.data.message) {
         return {
             user: {}, 
@@ -41,7 +39,14 @@ const getUser = async _ => {
     }
     localStorage.setItem('token', resp.data.token)
     return {
-        user: resp.data.user, 
+        user: {
+            id: resp.data.userInfo.id,
+            email: resp.data.userInfo.email,
+            role: resp.data.userInfo.role,
+            firstName: resp.data.userInfo.firstName,
+            lastName: resp.data.userInfo.lastName,
+            phone: resp.data.userInfo.phone
+        }, 
         cart: resp.data.products
     }
 }

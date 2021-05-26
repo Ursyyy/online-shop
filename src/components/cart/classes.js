@@ -147,11 +147,16 @@ const useClasses = makeStyles(theme => ({
                     fontSize: 15
                 }
             },
+            '& a': {
+                textDecoration: 'none'
+            },
             '& .create-order-button': {
                 background: theme.palette.primary.main,
                 color: '#fff',
                 padding: '10px 18px',
                 borderRadius: 6,
+                fontSize: 18,
+                textTransform: 'capitalize',
                 '&:hover': {
                     background: '#3da0eb'
                 }

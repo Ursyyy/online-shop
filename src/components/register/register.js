@@ -1,11 +1,8 @@
 import React, {useState, useContext} from 'react'
 import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
+
 import TextField from '@material-ui/core/TextField'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import CloseRoundedIcon from '@material-ui/icons/CloseRounded'
+
 import { Typography, Link } from '@material-ui/core'
 import useClasses from './classes'
 import { EMAIL, INPUT_PHONE, PHONE } from '../../utils/regexp'
@@ -15,7 +12,7 @@ import { SET_USER } from '../../storage/types'
 import { createCart } from '../../https/cartAPI'
 
 
-const Register = ({open, close, changeAuth}) => {
+const Register = ({close}) => {
     const classes = useClasses()
     const [firstName, setFname] = useState('')
     const [lastName, setSname] = useState('')
@@ -58,13 +55,11 @@ const Register = ({open, close, changeAuth}) => {
                         role: 'USER'
                     }
                 }) 
-                if(state.cart.products.length > 0){
-                    console.log(state.cart.products)
-                    const products = state.cart.products
-                    let items = products.map(product => {
+                if(state.cart.length > 0){
+                    let items = state.cart.map(product => {
                         return {
                             quantity: product.quantity,
-                            productId: product.product.id
+                            productId: product.id
                         }
                     })
                     await createCart(items)
@@ -103,17 +98,7 @@ const Register = ({open, close, changeAuth}) => {
     }
 
     return (
-        <Dialog
-            className={classes.dialog}
-            open={open}
-            onClose={close}
-            scroll='paper'
-            >
-            <DialogTitle className={classes.title}>
-                Register
-                <CloseRoundedIcon onClick={close}/>
-            </DialogTitle>
-            <DialogContent className={classes.content}>
+            <div className={classes.content}>
                 <div className={classes.loginForm}>
                     <Typography className='label'>First name</Typography>
                     <TextField className='inputField' type='text' variant="outlined" error={typeof errors.firstName != 'undefined'} helperText={errors.firstName} onChange={e => setFname(capitalize(e.target.value))}/>
@@ -129,16 +114,13 @@ const Register = ({open, close, changeAuth}) => {
                         <Typography className='descr'>The password must be at least 6 characters long, contain numbers and Latin letters, including capital letters, and must not coincide with the name and email.</Typography>
                         <Typography className='descr'>By registering, you agree to the <Link to="#">user agreement</Link></Typography>
                     </div>
-                    <DialogActions>
-                        <Button className={classes.loginBtn} onClick={register} color="primary">
+                    <div className={classes.loginBtn}>
+                        <Button className='btn' onClick={register} color="primary">
                             Register
                         </Button>
-                    </DialogActions>
-                    <div className={classes.register}>
-                        <Link to="#" color="primary" onClick={changeAuth}>Login</Link>
                     </div>
                 </div>
-                <div className='servicesBtn'>
+                <div className={classes.servicesBtn}>
                     <Typography className='label'>Register with</Typography>
                     <Button className='connectBtn' color="primary">
                         <svg 
@@ -169,8 +151,7 @@ const Register = ({open, close, changeAuth}) => {
                         Google
                     </Button>
                 </div>
-            </DialogContent>
-        </Dialog>
+            </div>
     )
 }
 

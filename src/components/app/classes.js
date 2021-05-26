@@ -7,7 +7,7 @@ const secondaryColor = '#345DA7'
 
 const useClasses = makeStyles((theme) => ({
     body: {
-        paddingBottom: 70
+        padding: '0 50px 70px'
     }
 }))
 

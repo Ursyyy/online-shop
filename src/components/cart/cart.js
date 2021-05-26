@@ -1,20 +1,33 @@
 import React, {useContext, useEffect, useState} from 'react'
+import { useHistory } from "react-router-dom"
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded'
 import useClasses from './classes'
-import { Typography, TextField, Button } from '@material-ui/core'
+import { Typography, Button } from '@material-ui/core'
 import { StateContext } from '../../storage/context'
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined'
-import { REMOVE_ITEM, SET_ITEM_IN_CART } from '../../storage/types'
+import { REMOVE_ITEM, SET_HEADER, SET_ITEM_IN_CART } from '../../storage/types'
+import { isUserLogined } from '../../utils/isUserLogined'
+import { addToCart, removeItem } from '../../https/cartAPI'
+import { CHECKOUT } from '../../router/paths'
 
 const Cart = ({open, close, cart}) => {
     const classes = useClasses()
+    const history = useHistory()
     const [state, dispatch] = useContext(StateContext)
-    const [allPrice, setPrice] = useState(state.price)
+    const [allPrice, setPrice] = useState(0)
 
-    const changeQuantity = (type, index )=> {
+    useEffect( _ => {
+        let newPrice = 0
+        cart.map(product => {
+            newPrice += product.quantity * product.price
+        })
+        setPrice(newPrice || 0)
+    }, [state])
+
+    const changeQuantity = async (type, index )=> {
         const item = cart[index]
         if(type === 'add'){
             item.quantity++
@@ -30,31 +43,43 @@ const Cart = ({open, close, cart}) => {
                 item
             }
         })
-        if(cart.id === -1){
+        if(isUserLogined(state.user)){
             localStorage.setItem('products', JSON.stringify(cart))
+        } else {
+            await addToCart({
+                productId: item.id,
+                quantity: item.quantity
+            })
         }
     }
     
     const removeFromCart = async index => {
+        const id = cart[index].id
         await dispatch({
             type: REMOVE_ITEM,
             payload: {
                 index
             }
         })
-        if(cart.id === -1){
+        if(isUserLogined(state.user)){
             localStorage.setItem('products', JSON.stringify(cart))
+        } else {
+            await removeItem({
+                productId: id 
+            })
         }
     }
 
-    useEffect( _ => {
-        let newPrice = 0
-        // cart.map(product => {
-        //     newPrice += product.quantity * product.price
-        // })
-        console.log(cart)
-        setPrice(newPrice)
-    }, [state])
+    const createOrder = _ => {
+        dispatch({
+            type: SET_HEADER,
+            payload: false
+        })
+        close()
+        history.push(CHECKOUT)
+    }
+
+    
 
     return (
         <Dialog
@@ -92,7 +117,7 @@ const Cart = ({open, close, cart}) => {
                         <div className={classes.orderBlock}>
                             <div className='create-order'> 
                                 <Typography className='order-price'>{allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</Typography>
-                                <Button className='create-order-button'>Create order</Button>
+                                <Button className='create-order-button' onClick={createOrder}>Create order</Button>
                             </div>
                         </div>
                     </div>

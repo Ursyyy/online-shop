@@ -11,11 +11,13 @@ const useClasses = makeStyles(theme => ({
         width: 200,
         zIndex: 10,
         wordBreak: 'break-all',
-        border: 'solid 1px #00000025',
+        border: 'solid 1px #e9e9e9',
+        borderLeft: 'none',
         borderRadius: 0,
         overflow: 'hidden',
         padding: '0 10px 13px',
         transition: 'all .3s ease-in-out',
+        boxShadow: 'none',
         '& img': {
             width: 180,
             height: 'auto',
@@ -37,7 +39,7 @@ const useClasses = makeStyles(theme => ({
                     fontSize: 17
                 },
             },
-            '& svg': {
+            '& .add-to-cart': {
                 width: 25,
                 height: 25,
                 marginLeft: 'auto',
@@ -48,6 +50,9 @@ const useClasses = makeStyles(theme => ({
                     borderRadius: 8,
                     background: '#e9e9e9'                
                 }
+            },
+            '& .in-cart': {
+                margin: 5
             }
         },
         
