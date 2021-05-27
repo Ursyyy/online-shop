@@ -12,6 +12,7 @@ import { REMOVE_ITEM, SET_HEADER, SET_ITEM_IN_CART } from '../../storage/types'
 import { isUserLogined } from '../../utils/isUserLogined'
 import { addToCart, removeItem } from '../../https/cartAPI'
 import { CHECKOUT } from '../../router/paths'
+import { getImage, getPrice } from '../../utils/convertData'
 
 const Cart = ({open, close, cart}) => {
     const classes = useClasses()
@@ -99,7 +100,7 @@ const Cart = ({open, close, cart}) => {
                             {state.cart.map((product, index) => {
                                 return (
                                     <li key={product.id} className='product-item'>
-                                        <img src={`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_PORT}/${product.img}`}/>
+                                        <img src={getImage(product.img)}/>
                                         <Typography className='title'>{product.name}</Typography>
                                         <div className='quantity'>
                                             <div className={product.quantity > 1 ? 'change-count' : 'change-count disabled'} onClick={_ => changeQuantity('remove', index)}>-</div>
@@ -107,7 +108,7 @@ const Cart = ({open, close, cart}) => {
                                             <div className='change-count' onClick={_ => changeQuantity('add', index)}>+</div>
                                         </div>
                                         <div className='price-block'>
-                                            <Typography className='product-price'>{(product.quantity * product.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</Typography>
+                                            <Typography className='product-price'>{getPrice(product.quantity * product.price)}</Typography>
                                         </div>
                                         <CloseOutlinedIcon className='icon' color='secondary' onClick={_ => removeFromCart(index)} />
                                     </li>
@@ -116,7 +117,7 @@ const Cart = ({open, close, cart}) => {
                         </ul>
                         <div className={classes.orderBlock}>
                             <div className='create-order'> 
-                                <Typography className='order-price'>{allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</Typography>
+                                <Typography className='order-price'>{getPrice(allPrice)}</Typography>
                                 <Button className='create-order-button' onClick={createOrder}>Create order</Button>
                             </div>
                         </div>

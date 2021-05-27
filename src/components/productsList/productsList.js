@@ -10,6 +10,7 @@ import { StateContext } from '../../storage/context';
 import { SET_CART } from '../../storage/types';
 import { isUserLogined } from '../../utils/isUserLogined';
 import { addToCart } from '../../https/cartAPI'
+import { getImage } from '../../utils/convertData'
 
 const ProductsList = () => {
     const classes = useClasses();
@@ -63,7 +64,7 @@ const ProductsList = () => {
                 <Grid container >
                     {products.map(item => (
                         <Paper className={classes.paper} key={item.id}>
-                            <img src={`${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_PORT}/${item.img}`}/>
+                            <img src={getImage(item.img)}/>
                             <Typography className='title'>{item.name}</Typography>
                             <div className="controll">
                                 <Typography className='price'>{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</Typography>
