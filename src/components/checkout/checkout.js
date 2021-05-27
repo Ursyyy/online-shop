@@ -143,11 +143,9 @@ const Checkout = _ => {
                         </FormControl>
                     </div>
                     </div>
-                    <div className='confirm'>Order</div>
+                    <div className='order-total'>Order</div>
                 </div>
             </div>
-            
-            <Button onClick={_ => history.goBack()}>Go back</Button>
         </div>
     )
 }

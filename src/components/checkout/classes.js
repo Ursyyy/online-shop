@@ -7,15 +7,23 @@ const useClasses = makeStyles(theme => ({
         
     },
     order: {
-        '& .confirm': {
+        '& .order-total': {
             height: 50,
             width: '25%',
-            position: 'sticky'
+            padding: 16,
+            backgroundColor: '#f5f5f5',
+            borderRadius: 4,
+            border: '1px solid #e9e9e9',
+            position: 'sticky',
+            top: 20,
+            // width: 284,
+            flexShrink: 0,
+            marginLeft: 30
         },
-        width: '80%',
+        // width: '80%',
         borderTop: 'solid 1px #e9e9e9',
         margin: 'auto',
-        padding: '25px 15px',
+        padding: '25px 45px',
         '& .order-title': {
             fontSize: 25,
             fontFamily: 'Montserrat',
@@ -125,9 +133,9 @@ const useClasses = makeStyles(theme => ({
                 color: '#797878',
                 border: 'solid 1px #e9e9e9',
                 borderRadius: 10,
+                marginLeft: 50,
                 margin: '10px 0',
-                maxWidth: '30%',
-                // width: '75%',
+                width: 230,
                 padding: '15px 20px',
                 '& .input-card': {
                     // width: '50%'
