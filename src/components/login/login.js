@@ -21,6 +21,13 @@ const Login = ({close}) => {
     const [emailError, setEmailError] = useState([false, ''])
     const [passError, setPassError] = useState([false, '']) 
     const [state, dispatch] = useContext(StateContext)
+
+    const keyPressed = async e => {
+        if(e.key === 'Enter'){
+            await login()
+        }
+    }
+
     const login = async () => {
         setEmailError([false, ''])
         setPassError([false, ''])
@@ -79,7 +86,7 @@ const Login = ({close}) => {
                     <Link to="#" color="primary">Fogot password?</Link>
                 </div>
                 <div className={classes.loginBtn}>
-                    <Button className='btn' onClick={login} color="primary">
+                    <Button className='btn' onClick={login} onKeyPress={keyPressed} color="primary">
                         Login
                     </Button>
                 </div>

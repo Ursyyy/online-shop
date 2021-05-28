@@ -39,6 +39,7 @@ const useClasses = makeStyles(theme => ({
         }, 
         '& .emptyCart': {
             padding: '100px 200px',
+            margin: 'auto',
             '& svg':{
                 width: 150,
                 height: 'auto' 
@@ -108,8 +109,9 @@ const useClasses = makeStyles(theme => ({
             },
             '& .price-block': {
                 width: '23%',
+                margin: 'auto 0',
                 '& .product-price': {
-                    marginTop: 24,
+                    marginTop: 10,
                     fontSize: 20,
                     marginRight: 5,
                     '&:after': {

@@ -13,11 +13,16 @@ const useClasses = makeStyles( theme => ({
 			borderTop: 'solid 1px #e9e9e9',
 			marginBottom: 10,
 			padding: '15px 0',
+			width: '100%',
+			'& label': {
+				width: '100%'
+			},
 			'& .filter-title': {
 				color: theme.palette.secondary.main,
-				fontSize: 18
+				fontSize: 18,
 			},
 			'& .filter-item':{ 
+				
 				'& .MuiTypography-body1': {
 					fontSize: 14
 				},

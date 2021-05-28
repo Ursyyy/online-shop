@@ -1,8 +1,9 @@
 import {lazy} from 'react'
-import {CHECKOUT, MAIN_PAGE, PRODUCTS_PAGE} from './paths'
+import {CHECKOUT, CHECKOUT_CREATED, MAIN_PAGE, PRODUCTS_PAGE} from './paths'
 import MainPage from '../components/mainPage/mainPage'
 import ProductsList from '../components/productsList/productsList'
 import Checkout from '../components/checkout/checkout'
+import CheckoutIsCreated from '../components/checkoutIsCreated/checkoutIsCreated'
 const routes = [
 	{
 		path: `${PRODUCTS_PAGE}/:id`,
@@ -23,8 +24,14 @@ const routes = [
 		isPrivate: false
 	},
 	{
+		path: CHECKOUT_CREATED,
+		component: CheckoutIsCreated,
+		exact: false,
+		isPrivate: true
+	},
+	{
 		path: MAIN_PAGE,
-		component: MainPage,
+		component: ProductsList,
 		exact: false,
 		isPrivate: false
 	},

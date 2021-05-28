@@ -8,8 +8,8 @@ const useClasses = makeStyles(theme => ({
     },
     order: {
         '& .order-total': {
-            height: 50,
             width: '25%',
+            maxHeight: 165,
             padding: 16,
             backgroundColor: '#f5f5f5',
             borderRadius: 4,
@@ -18,7 +18,43 @@ const useClasses = makeStyles(theme => ({
             top: 20,
             // width: 284,
             flexShrink: 0,
-            marginLeft: 30
+            marginLeft: 30,
+            '& .title': {
+                fontSize: 26,
+                marginBottom: 10
+            },
+            '& .price': {
+                textAlign: 'end',
+                fontSize: 18,
+                marginBottom: 15,
+                '&::after': {
+                    content: '" ₴"',
+                    fontSize: '0.85em'
+                },
+            },
+            '& .btn-group': {
+                textAlign: 'center',
+                '& .cancel-link': {
+                    textDecoration: 'none',
+                    color: '#797878',
+                    '&:hover': {
+                        color: '#595959',
+                        textDecoration: 'underline'
+                    }
+                }
+            },
+            '& .create-order-btn': {
+                background: theme.palette.primary.main,
+                color: '#fff',
+                padding: '10px 18px',
+                borderRadius: 6,
+                fontSize: 18,
+                marginBottom: 10,
+                textTransform: 'capitalize',
+                '&:hover': {
+                    background: '#3da0eb'
+                }
+            }
         },
         // width: '80%',
         borderTop: 'solid 1px #e9e9e9',
@@ -28,6 +64,11 @@ const useClasses = makeStyles(theme => ({
             fontSize: 25,
             fontFamily: 'Montserrat',
             marginBottom: 10,
+        },
+        '& .description': {
+            fontSize: 15,
+            color: '#797878',
+            marginBottom: 10
         },
         '& .title': {
             fontSize: 30,

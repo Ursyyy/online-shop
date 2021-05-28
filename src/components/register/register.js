@@ -27,6 +27,12 @@ const Register = ({close}) => {
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
     }
 
+    const keyPressed = async e => {
+        if(e.key === 'Enter'){
+            await register()
+        }
+    }
+
     const checkPhone = e => {
         const text = e.target.value
         if(INPUT_PHONE.test(text)){
@@ -115,7 +121,7 @@ const Register = ({close}) => {
                         <Typography className='descr'>By registering, you agree to the <Link to="#">user agreement</Link></Typography>
                     </div>
                     <div className={classes.loginBtn}>
-                        <Button className='btn' onClick={register} color="primary">
+                        <Button className='btn' onClick={register} onKeyPress={keyPressed} color="primary">
                             Register
                         </Button>
                     </div>

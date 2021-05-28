@@ -1,6 +1,5 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded'
@@ -16,6 +15,12 @@ const Auth = ({open, setOpen}) => {
     const classes = useClasses()
     const [isLogin, setLogin] = useState(true)
     const [state] = useContext(StateContext)
+
+    useEffect( _ => {
+        if(open && !isUserLogined(state.user)){
+            setOpen(false)
+        }
+    }, [open])
 
     const closeHandler = () => {
         setOpen(false)
@@ -43,7 +48,7 @@ const Auth = ({open, setOpen}) => {
                     
             </DialogContent>
             <div className={classes.setAuth}>
-                <Link to="#" color="primary" onClick={() => setLogin(!isLogin)}>{ isLogin ? "Login" : 'Register'}</Link>
+                <Link to="#" color="primary" onClick={() => setLogin(!isLogin)}>{ !isLogin ? "Login" : 'Register'}</Link>
             </div>
         </Dialog>
     )

@@ -20,7 +20,7 @@ const useClasses = makeStyles(theme => ({
         boxShadow: 'none',
         '& img': {
             width: 180,
-            height: 'auto',
+            minHeight: 160,
             margin: '30px 10px 0',
         },
         '& .title': {
@@ -81,6 +81,13 @@ const useClasses = makeStyles(theme => ({
     control: {
         padding: theme.spacing(2),
     },
+    empty: {
+        display: 'flex',
+        width: '79%',
+        '& svg': {
+            margin: 'auto'
+        }
+    }
 }))
 
 export default useClasses
