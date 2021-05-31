@@ -6,6 +6,7 @@ const init = {
     user: { },
     cart: [],
     isHeaderOpen: true,
+    catalog: []
 }
 
 const StateContext = createContext()

@@ -10,10 +10,14 @@ const useClasses = makeStyles(theme => ({
 		'& .title': {
 			display: 'none',
 			fontWeight: 700,
+
 			textTransform: 'uppercase',
 			[theme.breakpoints.up('sm')]: {
 					display: 'block',
 			},
+			'&:hover': {
+				cursor: 'pointer'
+			}
 		},
 		'& .svg': {
 			width: 24,
