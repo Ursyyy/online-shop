@@ -12,7 +12,6 @@ const CheckoutIsCreated = _ => {
     const history = useHistory()
     const [state, dispatch] = useContext(StateContext)
     useEffect(async _ => {
-        console.log(history)
         if(history.location.state !== CHECKOUT){
             history.push(MAIN_PAGE)
         }
@@ -21,7 +20,7 @@ const CheckoutIsCreated = _ => {
             payload: false
         })
         setTimeout(_ => {
-            history.push(MAIN_PAGE)
+            history.go(-2)
         }, 2500)
     },[])
 

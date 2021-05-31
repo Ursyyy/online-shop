@@ -93,24 +93,29 @@ const Profile = _ => {
                     //{"coast":"100000.00","status":"CONFIRMED","id":3,"order_products":[{"id":3,"quantity":1,"createdAt":"2021-05-28T12:47:22.141Z","updatedAt":"2021-05-28T12:47:22.141Z","orderId":3,"productId":2,"product":{"name":"iPhone 1","price":"100000.00","id":2}}]}
                     orders.length ?
                     <ul>
-                        {orders.map(item => {
-                            let displayInfo = 'Het'
-                            return (
-                                <li className='list-item' key={item.id}>
-                                    <div className='order-info'>
-                                        <Typography className='block-title'>{item.updatedAt.split('T')[0]}</Typography>
-                                        <Typography className='order-status'>{item.status === 'CONFIRMED' ? 'Waiting for payment' : 'Done'}</Typography>
-                                    </div>
-                                    <div className='order-price'>
-                                        <Typography className='block-title'>Order summary</Typography>
-                                        <Typography className='order-summary'>{getPrice(item.cost)}</Typography>
-                                    </div>
-                                    <div className='order-products' onClick={_ => displayInfo = "No het"}>
-                                        ++++{displayInfo}
-                                    </div>
-                                </li>
-                            )
-                        })}
+                        {orders.map(item => (
+                            <li className='list-item' key={item.id}>
+                                <div className='order-info'>
+                                    <Typography className='block-title'>{item.updatedAt.split('T')[0]}</Typography>
+                                    <Typography className='order-status'>{item.status === 'CONFIRMED' ? 'Waiting for payment' : 'Done'}</Typography>
+                                </div>
+                                <div className='order-price'>
+                                    <Typography className='block-title'>Order summary</Typography>
+                                    <Typography className='order-summary'>{getPrice(item.cost)}</Typography>
+                                </div>
+                                <div className='order-products'>
+                                   <Typography className='block-title'>Products</Typography>
+                                   <ul>
+                                       {item.order_products.map(product => (
+                                           <li className='products'>
+                                               <Typography className='product-name'>{product.product.name}</Typography>
+                                               <Typography className='product-price'>{getPrice(product.product.price)}</Typography>
+                                           </li>
+                                       ))}
+                                   </ul>
+                                </div>
+                            </li>
+                        ))}
                     </ul>
                     :
                     <div className={classes.emptyOrder}>

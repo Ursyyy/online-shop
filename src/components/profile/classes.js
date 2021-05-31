@@ -125,11 +125,34 @@ const useClasses = makeStyles(theme => ({
             },
             '& .order-summary': {
                 fontSize: 14,
+                width: '100%',
                 '&::after': {
                     content: '" ₴"',
                     fontSize: 12
                 }
+            },
+            '& .order-products': {
+                textAlign: 'center'
+            },
+            '& ul': {
+                marginBlock: 0,
+                width: '100%',
+                padding: '0 14px'
+            },
+            '& .products':{
+                display: 'flex',
+                paddingRight: 10,
+                justifyContent: 'space-between',
+                '& .product-name': {
+                    fontSize: 14
+                },
+                '& .product-price::after': {
+                        content: '" ₴"',
+                        fontSize: 12
+                }
+
             }
+            
         },
         '& .title': {
             fontSize: 36,
