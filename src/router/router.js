@@ -2,8 +2,7 @@ import React, {Suspense} from 'react'
 import { Route} from 'react-router-dom'
 
 
-const AppRouter = ({path, component: Component, isPrivate, redirect, props}) => {
-    // const checkIsAuth = () => true
+const AppRouter = ({path, component: Component, props}) => {
     return (
         <Suspense fallback="Load...">
             <Route 
@@ -16,12 +15,3 @@ const AppRouter = ({path, component: Component, isPrivate, redirect, props}) => 
 }
 
 export default AppRouter
-
-
-/*{
-                isPrivate && !checkIsAuth() ? (
-                    <Redirect to={redirect}/>
-                    ): (
-                    <Component {...props}/>
-            )}
-            */

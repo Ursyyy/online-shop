@@ -7,7 +7,8 @@ import routes from '../../router/routes'
 import AppRouter from '../../router/router'
 import { StateContext } from '../../storage/context'
 import {getUser} from '../../https/userAPI'
-import { SET_CART, SET_USER } from '../../storage/types'
+import { SET_CART, SET_CATALOG, SET_USER } from '../../storage/types'
+import { getCatalog } from '../../https/catalogAPI'
 
 const App = () => {
     const classes = useClasses()
@@ -32,6 +33,11 @@ const App = () => {
             })
             
         }
+        const catalog = await getCatalog()
+        dispatch({
+            type: SET_CATALOG,
+            payload: catalog
+        })
     },[])
 
     return (

@@ -109,7 +109,6 @@ const Profile = _ => {
                                        {item.order_products.map(product => (
                                            <li className='products'>
                                                <Typography className='product-name'>{product.product.name}</Typography>
-                                               <Typography className='product-price'>{getPrice(product.product.price)}</Typography>
                                            </li>
                                        ))}
                                    </ul>

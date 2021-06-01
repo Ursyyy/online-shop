@@ -5,9 +5,9 @@ const getAllProducts = async () => {
     return resp.data
 }
 
-const getProdyctById = async id => {
-    const resp = await axiosInstance.get(`/api/product/${id}`)
+const getProdyctsById = async id => {
+    const resp = await axiosInstance.get(`/api/product?typeid=${id}`)
     return resp.data
 }
 
-export {getAllProducts, getProdyctById}
+export {getAllProducts, getProdyctsById}

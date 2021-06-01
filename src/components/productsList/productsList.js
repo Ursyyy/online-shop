@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import useClasses from './classes';
 import FiltersBlock from '../filters/filters'
 import { Typography } from '@material-ui/core';
-import { getAllProducts } from '../../https/productsAPI';
+import { getAllProducts, getProdyctsById } from '../../https/productsAPI';
 import { StateContext } from '../../storage/context';
 import { SET_CART } from '../../storage/types';
 import { isUserLogined } from '../../utils/isUserLogined';
@@ -18,8 +18,17 @@ const ProductsList = () => {
     const classes = useClasses();
     const [products, setProducts] = useState([]);
     const [state, dispatch] = useContext(StateContext)
+
     useEffect(async () => {
-        const data = await getAllProducts();
+        const location = window.location.pathname.replace('/','')
+        let data = []
+        console.log(location)
+        if(location === ''){
+            data = await getAllProducts();
+        } else {
+            data = await getProdyctsById(location)
+            console.log(data)
+        }
         setProducts(data);
     },[])
 

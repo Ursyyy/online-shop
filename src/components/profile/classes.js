@@ -141,7 +141,6 @@ const useClasses = makeStyles(theme => ({
             },
             '& .products':{
                 display: 'flex',
-                paddingRight: 10,
                 justifyContent: 'space-between',
                 '& .product-name': {
                     fontSize: 14
