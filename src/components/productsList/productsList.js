@@ -20,9 +20,10 @@ const ProductsList = () => {
     const [state, dispatch] = useContext(StateContext)
 
     useEffect(async () => {
-        const location = window.location.pathname.replace('/','')
+        const location = window.location.pathname.split('/').reverse()[0]
+        console.log(location)
         let data = []
-        if(location === ''){
+        if(location === 'products'){
             data = await getAllProducts();
         } else {
             data = await getProdyctsById(location)

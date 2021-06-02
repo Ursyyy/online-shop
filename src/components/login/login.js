@@ -1,11 +1,6 @@
 import React, {useContext, useState} from 'react'
 import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
 import TextField from '@material-ui/core/TextField'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import CloseRoundedIcon from '@material-ui/icons/CloseRounded'
 import useClasses from './classes'
 import { Typography, Link } from '@material-ui/core'
 import { loginUser } from '../../https/userAPI'
@@ -14,7 +9,7 @@ import { EMAIL } from '../../utils/regexp'
 import { StateContext } from '../../storage/context'
 import { SET_CART, SET_USER } from '../../storage/types'
 
-const Login = ({close}) => {
+const Login = ({close, fogotPass}) => {
     const classes = useClasses()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -83,7 +78,7 @@ const Login = ({close}) => {
                 <Typography className='label'>Password</Typography>
                 <TextField className='inputField' type="password" variant="outlined" error={passError[0]} helperText={passError[1]} onChange={e => setPassword(e.target.value)} />
                 <div className='secondary'>
-                    <Link to="#" color="primary">Fogot password?</Link>
+                    <Link to="#" color="primary" onClick={fogotPass}>Fogot password?</Link>
                 </div>
                 <div className={classes.loginBtn}>
                     <Button className='btn' onClick={login} onKeyPress={keyPressed} color="primary">

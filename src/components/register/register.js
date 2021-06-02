@@ -92,7 +92,7 @@ const Register = ({close}) => {
             if(!PHONE.test(phone)){
                 newErrors.phone = "Please enter your phone number"
             }
-            if(!EMAIL.test(email) ){
+            if(!EMAIL.test(email)){
                 newErrors.email = "Please enter your email"
             }
             if(password === ''){

@@ -33,6 +33,7 @@ const useClasses = makeStyles(theme => ({
         paddingRight: 19,
         '& .secondary': {
             '& .descr': {
+                
                 color: '#00000080',
                 fontSize: '0.75em',
                 marginTop: -7,

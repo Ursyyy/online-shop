@@ -10,10 +10,11 @@ import Register from '../register/register'
 
 import useClasses from './classes'
 import { Link } from 'react-router-dom'
+import FogotPassword from '../fogotPassword/fogotPassword'
 
 const Auth = ({open, setOpen}) => {
     const classes = useClasses()
-    const [isLogin, setLogin] = useState(true)
+    const [dialogForm, setDialog] = useState('login')
     const [state] = useContext(StateContext)
 
     useEffect( _ => {
@@ -23,8 +24,8 @@ const Auth = ({open, setOpen}) => {
     }, [open])
 
     const closeHandler = () => {
+        setDialog('login')
         setOpen(false)
-        // setLogin(true)
     }
 
     return (
@@ -35,21 +36,37 @@ const Auth = ({open, setOpen}) => {
             scroll='paper'
             >
             <DialogTitle className={classes.title}>
-                { isLogin ? "Login" : 'Register'}
+                { dialogForm === 'login' ? "Login" : dialogForm === 'register' ? 'Register' : 'Reset password'}
                 <CloseRoundedIcon onClick={closeHandler}/>
             </DialogTitle>
             <DialogContent className={classes.content}>
             {   isUserLogined(state.user) ?
-                    isLogin ? 
-                        <Login close={closeHandler}/> 
-                        :<Register close={closeHandler}/> 
+                    (() => {
+                        if(dialogForm === 'login'){
+                            return (
+                                <Login close={closeHandler} fogotPass={_ => setDialog('fogot')}/> 
+                            )
+                        } else if(dialogForm === 'register'){
+                            return (
+                                <Register close={closeHandler}/>
+                            )
+                        } else {
+                            return (
+                                <FogotPassword />
+                            )
+                        }
+                    })()
                         : <></>
             }
                     
             </DialogContent>
-            <div className={classes.setAuth}>
-                <Link to="#" color="primary" onClick={() => setLogin(!isLogin)}>{ !isLogin ? "Login" : 'Register'}</Link>
-            </div>
+            {
+                dialogForm !== 'fogot' ? 
+                <div className={classes.setAuth}>
+                    <Link to="#" color="primary" onClick={() => setDialog(dialogForm === 'login' ? 'register' : 'login')}>{ dialogForm === 'login' ? "Login" : 'Register'}</Link>
+                </div> :
+                <></>
+            }
         </Dialog>
     )
 }

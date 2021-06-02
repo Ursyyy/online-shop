@@ -17,7 +17,7 @@ const Categories = ({open, close}) => {
 
     const goToCategory = id => {
         close()
-        history.push(`${MAIN_PAGE}${id}`)
+        history.push(`${MAIN_PAGE}/${id}`)
     }
 
     return (

@@ -43,7 +43,7 @@ const Header = () => {
 						className={classes.bar} 
 						position="static">
 						<Toolbar>
-							<MenuRoundedIcon className='menuButton'/>
+							{/* <MenuRoundedIcon className='menuButton'/> */}
 							<Typography variant="h5" className='title' onClick={_ => history.push(MAIN_PAGE)}>
 								Online shop
 							</Typography>
