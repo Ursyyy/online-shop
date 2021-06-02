@@ -22,15 +22,13 @@ const ProductsList = () => {
     useEffect(async () => {
         const location = window.location.pathname.replace('/','')
         let data = []
-        console.log(location)
         if(location === ''){
             data = await getAllProducts();
         } else {
             data = await getProdyctsById(location)
-            console.log(data)
         }
-        setProducts(data);
-    },[])
+        setProducts(data)
+    },[window.location.pathname.replace('/','')])
 
     const addItem = async item => {
         let products;
@@ -121,6 +119,7 @@ const ProductsList = () => {
                 :
                 <div className={classes.empty}>
                     {EMPTY_LIST}
+                    <Typography className='caption'>No products</Typography>
                 </div>
                 
             }

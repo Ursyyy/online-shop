@@ -82,10 +82,17 @@ const useClasses = makeStyles(theme => ({
         padding: theme.spacing(2),
     },
     empty: {
-        display: 'flex',
+        // display: 'flex',
+        margin: 'auto',
         width: '79%',
+        textAlign: 'center',
         '& svg': {
             margin: 'auto'
+        },
+        '& .caption': {
+            margin: 25,
+            fontSize: 23,
+            fontFamily: 'Montserrat'
         }
     }
 }))
