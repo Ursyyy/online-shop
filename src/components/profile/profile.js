@@ -1,14 +1,18 @@
 import { Button, TextField, Typography } from '@material-ui/core'
 import React, { useContext, useEffect, useState } from 'react'
+import { useHistory } from 'react-router'
 import { getOrders } from '../../https/orderAPI'
+import { MAIN_PAGE } from '../../router/paths'
 
 import {StateContext} from '../../storage/context'
+import { CLEAR } from '../../storage/types'
 import {contactSvg, editSvg, emptyOrders, profileSvg} from '../../svg/profile'
 import { getPrice } from '../../utils/convertData'
 import useClasses from './classes'
 
 const Profile = _ => {
     const classes = useClasses()
+    const history = useHistory()
     const [editPersonal, setEditPersonal] = useState(false)
     const [editContacts, setEditContacts] = useState(false)
     const [checked, setChecked] = useState(0)
@@ -19,6 +23,14 @@ const Profile = _ => {
         setOrders(await getOrders())
         console.log(await getOrders())
     }, [])
+
+    const logout = _ => {
+        localStorage.clear()
+        dispatch({
+            type: CLEAR,
+        })
+        history.push(MAIN_PAGE)
+    }
 
     return (
         <div className={classes.root}>
@@ -86,6 +98,7 @@ const Profile = _ => {
                         </div>
                     </div>
                 </div>
+                <Typography className='logout-btn' onClick={logout}> Logout</Typography>
             </div>
             <div className={checked === 1 ? classes.orderList : 'none'}>
                 <Typography className='title'>My orders</Typography>

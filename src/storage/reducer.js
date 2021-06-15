@@ -46,6 +46,7 @@ const Reducer = (state, action) => {
             }
         case CLEAR:
             return {
+                ...state,
                 cart: [],
                 user: {}
             }

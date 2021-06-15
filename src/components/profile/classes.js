@@ -35,6 +35,15 @@ const useClasses = makeStyles(theme => ({
         padding: 40,
         borderLeft: 'solid 1px #e9e9e9',
         width: '100%',
+        '& .logout-btn': {
+            textAlign: 'end',
+            marginTop: 15,
+            color: theme.palette.primary.main,
+            '&:hover': {
+                color: theme.palette.primary.dark,
+                cursor: 'pointer'
+            }
+        },
         '& .title': {
             fontSize: 36,
             marginBottom: 24,

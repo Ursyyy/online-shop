@@ -51,5 +51,21 @@ const getUser = async _ => {
     }
 }
 
+const fogotPassword = async _ => {
+    const resp = await axiosInstance.post('/api/user/forgot-password/')
+    if(resp.message){
+        throw "User with this email was not found"
+    } 
+}
+
+const resetPassword = async email => {
+    const resp = axiosInstance.post('/api/user/reset-password/')
+    if(resp.message){
+        throw "Token timed out"
+    }
+    localStorage.setItem('token', resp.data.token)
+
+}
+
 
 export {registerUser, loginUser, getUser}
